@@ -17,7 +17,7 @@ public class ContasPagar
 
     @ManyToOne
     @JoinColumn(name = "fornecedor_id", nullable = false)
-    private CadastroFornecedores fornecedor;
+    private Fornecedor fornecedor;
 
     @Size(max = 255, message = "A descrição deve ter no máximo 255 caracteres.")
     private String descricao;
@@ -40,7 +40,7 @@ public class ContasPagar
         
     }
 
-    public ContasPagar(Long id, CategoriaContas categoria, CadastroFornecedores fornecedor,
+    public ContasPagar(Long id, CategoriaContas categoria, Fornecedor fornecedor,
             @Size(max = 255, message = "A descrição deve ter no máximo 255 caracteres.") String descricao,
             LocalDate dataVencimento,
             @NotNull(message = "O valor é obrigatório.") @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que zero.") Double valor,
@@ -76,12 +76,12 @@ public class ContasPagar
         this.categoria = categoria;
     }
 
-    public CadastroFornecedores getFornecedor()
+    public Fornecedor getFornecedor()
     {
         return fornecedor;
     }
 
-    public void setFornecedor(CadastroFornecedores fornecedor)
+    public void setFornecedor(Fornecedor fornecedor)
     {
         this.fornecedor = fornecedor;
     }

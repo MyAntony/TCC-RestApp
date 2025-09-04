@@ -21,7 +21,7 @@ public class MetodoPagamento
 
     public MetodoPagamento()
     {
-
+        
     }
 
     public MetodoPagamento(Long id,
