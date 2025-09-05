@@ -1,6 +1,6 @@
 package com.example.aula.controller;
 
-import com.example.aula.model.MetodoPagamento;
+import com.example.aula.model.financeiro.MetodoPagamento;
 import com.example.aula.service.MetodoPagamentoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

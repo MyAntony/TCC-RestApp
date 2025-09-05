@@ -1,7 +1,6 @@
 package com.example.aula.service;
 
-// import com.example.aula.exception.EmailJaCadastradoException;
-import com.example.aula.model.Fornecedor;
+import com.example.aula.model.financeiro.Fornecedor;
 import com.example.aula.repository.FornecedorRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;

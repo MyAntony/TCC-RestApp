@@ -1,6 +1,6 @@
 package com.example.aula.controller;
 
-import com.example.aula.model.Fornecedor;
+import com.example.aula.model.financeiro.Fornecedor;
 import com.example.aula.service.FornecedorService;
 import jakarta.validation.Valid;
 import org.springframework.http.*;
