@@ -1,4 +1,3 @@
-# backend-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,8 +13,9 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        image: backend:latest
+      - name: tcc-backend
+        image: tcc-backend:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
         env:
