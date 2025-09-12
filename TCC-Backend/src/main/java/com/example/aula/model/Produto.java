@@ -6,8 +6,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 // import jakarta.validation.constraints.Size;
+import lombok.*;
 
 @Entity
+@Getter // Gera os getters
+@Setter // Gera os setters
+@AllArgsConstructor // Gera o construtor com todos os argumentos
+@NoArgsConstructor // Gera o construtor sem argumentos
+
 public class Produto
 {
     @Id
@@ -31,83 +37,6 @@ public class Produto
 
     @Enumerated(EnumType.STRING)
     private Disponibilidade disponibilidade;
-
-    public Produto()
-    {
-
-    }
-
-    public Produto(Long id, String nome, Categoria categoria, String descricao, Double preco, String url, Disponibilidade disponibilidade)
-    {
-        this.id = id;
-        this.nome = nome;
-        this.categoria = categoria;
-        this.descricao = descricao;
-        this.preco = preco;
-        this.url = url;
-        this.disponibilidade = disponibilidade;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Disponibilidade getDisponibilidade() {
-        return disponibilidade;
-    }
-
-    public void setDisponibilidade(Disponibilidade disponibilidade) {
-        this.disponibilidade = disponibilidade;
-    }
-
-        
-
-    // Getters and Setters
-
     
 }
 

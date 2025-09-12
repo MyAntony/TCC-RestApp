@@ -3,8 +3,13 @@ package com.example.aula.model.financeiro;
 import java.time.LocalDate;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.*;
 
-@Entity
+@Entity // Indica que esta classe é uma entidade JPA
+@Getter // Gera os getters
+@Setter // Gera os setters
+@AllArgsConstructor // Gera o construtor com todos os argumentos
+@NoArgsConstructor // Gera o construtor sem argumentos
 public class ContasPagar
 {
     @Id
@@ -34,107 +39,4 @@ public class ContasPagar
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatusPagamento statusPagamento;
-
-    public ContasPagar()
-    {
-        
-    }
-
-    public ContasPagar(Long id, CategoriaContas categoria, Fornecedor fornecedor,
-            @Size(max = 255, message = "A descrição deve ter no máximo 255 caracteres.") String descricao,
-            LocalDate dataVencimento,
-            @NotNull(message = "O valor é obrigatório.") @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que zero.") Double valor,
-            LocalDate dataPagamento, StatusPagamento statusPagamento)
-    {
-        this.id = id;
-        this.categoria = categoria;
-        this.fornecedor = fornecedor;
-        this.descricao = descricao;
-        this.dataVencimento = dataVencimento;
-        this.valor = valor;
-        this.dataPagamento = dataPagamento;
-        this.statusPagamento = statusPagamento;
-    }
-
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    public CategoriaContas getCategoria()
-    {
-        return categoria;
-    }
-
-    public void setCategoria(CategoriaContas categoria)
-    {
-        this.categoria = categoria;
-    }
-
-    public Fornecedor getFornecedor()
-    {
-        return fornecedor;
-    }
-
-    public void setFornecedor(Fornecedor fornecedor)
-    {
-        this.fornecedor = fornecedor;
-    }
-
-    public String getDescricao()
-    {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao)
-    {
-        this.descricao = descricao;
-    }
-
-    public LocalDate getDataVencimento()
-    {
-        return dataVencimento;
-    }
-
-    public void setDataVencimento(LocalDate dataVencimento)
-    {
-        this.dataVencimento = dataVencimento;
-    }
-
-    public Double getValor()
-    {
-        return valor;
-    }
-
-    public void setValor(Double valor)
-    {
-        this.valor = valor;
-    }
-
-    public LocalDate getDataPagamento()
-    {
-        return dataPagamento;
-    }
-
-    public void setDataPagamento(LocalDate dataPagamento)
-    {
-        this.dataPagamento = dataPagamento;
-    }
-
-    public StatusPagamento getStatusPagamento()
-    {
-        return statusPagamento;
-    }
-
-    public void setStatusPagamento(StatusPagamento statusPagamento)
-    {
-        this.statusPagamento = statusPagamento;
-    }
-
-    
 }

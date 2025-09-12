@@ -2,8 +2,13 @@ package com.example.aula.model.financeiro;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.*;
 
-@Entity
+@Entity // Indica que esta classe é uma entidade JPA
+@Getter // Gera os getters
+@Setter // Gera os setters
+@AllArgsConstructor // Gera o construtor com todos os argumentos
+@NoArgsConstructor // Gera o construtor sem argumentos
 public class CategoriaContas
 {
     @Id
@@ -14,48 +19,5 @@ public class CategoriaContas
     private String nomeCategoria;
 
     private String descricaoCategoria;
-
-    public CategoriaContas()
-    {
         
-    }
-
-    public CategoriaContas(Long id, @NotBlank(message = "O nome da categoria é obrigatório.") String nomeCategoria, String descricaoCategoria)
-    {
-        this.id = id;
-        this.nomeCategoria = nomeCategoria;
-        this.descricaoCategoria = descricaoCategoria;
-    }
-
-    public Long getId()
-    {
-        return id;
-    }
-
-    public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    public String getNomeCategoria()
-    {
-        return nomeCategoria;
-    }
-
-    public void setNomeCategoria(String nomeCategoria)
-    {
-        this.nomeCategoria = nomeCategoria;
-    }
-
-    public String getDescricaoCategoria()
-    {
-        return descricaoCategoria;
-    }
-
-    public void setDescricaoCategoria(String descricaoCategoria)
-    {
-        this.descricaoCategoria = descricaoCategoria;
-    }
-
-    
 }

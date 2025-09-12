@@ -1,7 +1,15 @@
 package com.example.aula.dto;
 
-import jakarta.validation.constraints.*;
+import com.example.aula.model.Cargo;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.*;
+
+@Getter // Gera os getters
+@Setter // Gera os setters
+@AllArgsConstructor // Gera o construtor com todos os argumentos
+@NoArgsConstructor // Gera o construtor sem argumentos
 public class UsuarioDTO
 {
     @NotBlank(message = "O nome é obrigatório")
@@ -13,48 +21,9 @@ public class UsuarioDTO
     @NotBlank(message = "A senha é obrigatória")
     private String senha;
 
-    public UsuarioDTO()
-    {
-        
-    }
-
-    public UsuarioDTO(@NotBlank(message = "O nome é obrigatório") String nome, String email, @NotBlank(message = "A senha é obrigatória") String senha)
-    {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-    }
-
-    public String getNome()
-    {
-        return nome;
-    }
-
-    public void setNome(String nome)
-    {
-        this.nome = nome;
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    public String getSenha()
-    {
-        return senha;
-    }
-
-    public void setSenha(String senha)
-    {
-        this.senha = senha;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Cargo cargo;
 
     
-
 }

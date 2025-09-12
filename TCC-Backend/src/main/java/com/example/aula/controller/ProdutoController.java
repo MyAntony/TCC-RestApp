@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -29,6 +30,7 @@ public class ProdutoController
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<Map<String, Object>> salvar(@Valid @RequestBody Produto produto)
     {
         produtoService.salvar(produto);
@@ -38,6 +40,7 @@ public class ProdutoController
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<Map<String, Object>> atualizar(@PathVariable Long id, @Valid @RequestBody Produto produto)
     {
         produtoService.atualizar(id, produto);
@@ -47,6 +50,7 @@ public class ProdutoController
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<Map<String, Object>> excluir(@PathVariable Long id)
     {
         produtoService.excluir(id); 

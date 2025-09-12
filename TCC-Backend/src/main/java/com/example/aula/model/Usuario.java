@@ -1,11 +1,13 @@
 package com.example.aula.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
-@Table(name = "tab_usuario")
-@Data
+@Getter // Gera os getters
+@Setter // Gera os setters
+@AllArgsConstructor // Gera o construtor com todos os argumentos
+@NoArgsConstructor // Gera o construtor sem argumentos
 public class Usuario
 {
     @Id
@@ -21,4 +23,8 @@ public class Usuario
     @Column(nullable = false)
     private String senha;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Cargo cargo;
+    
 }

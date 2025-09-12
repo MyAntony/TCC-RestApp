@@ -30,6 +30,7 @@ public class UsuarioService
         Usuario usuario = new Usuario();
         usuario.setNome(dto.getNome());
         usuario.setEmail(dto.getEmail());
+        usuario.setCargo(dto.getCargo());
         usuario.setSenha(bCryptPasswordEncoder.encode(dto.getSenha())); // Criptografando a senha.
 
         return usuarioRepository.save(usuario);
@@ -45,7 +46,7 @@ public List<UsuarioResponseDTO> listarUsuarios()
 
 private UsuarioResponseDTO toDTO(Usuario usuario)
 {
-    return new UsuarioResponseDTO(usuario.getNome(), usuario.getEmail());
+    return new UsuarioResponseDTO(usuario.getNome(), usuario.getEmail(), usuario.getCargo());
 }
 
 }
