@@ -10,11 +10,11 @@ function BarraBotoes() {
       <button type="button" onClick={() => navigate('/')} disabled={location.pathname === '/'}>
         Início
       </button>
-      <button type="button" onClick={() => navigate('/pratos')} disabled={location.pathname === '/pratos'}>
-        Ver pratos cadastrados
+      <button type="button" onClick={() => navigate('/produtos')} disabled={location.pathname === '/produtos'}>
+        Ver produtos cadastrados
       </button>
       <button type="button" onClick={() => navigate('/cadastro')} disabled={location.pathname === '/cadastro'}>
-        Cadastrar prato
+        Cadastrar produto
       </button>
     </div>
   );

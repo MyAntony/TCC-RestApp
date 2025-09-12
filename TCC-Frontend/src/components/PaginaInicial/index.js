@@ -10,10 +10,10 @@ function PaginaInicial() {
     return (
         <div className='pagina-inicial'>
             <img src={logo} alt="Logo da empresa" />
-            <h2>Cadastro de pratos</h2>
+            <h2>Cadastro de produtos</h2>
             <h2>Bem-vindo!</h2>
-            <button onClick={() => navigate('/cadastro')}>Cadastrar Prato</button>
-            <button onClick={() => navigate('/pratos')}>Ver Pratos Cadastrados</button>
+            <button onClick={() => navigate('/cadastro')}>Cadastrar Produto</button>
+            <button onClick={() => navigate('/produtos')}>Ver Produtos Cadastrados</button>
         </div>
     )
 }

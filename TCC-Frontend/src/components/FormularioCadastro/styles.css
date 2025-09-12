@@ -72,7 +72,7 @@ button:hover {
   background-color: #1d3577;
 }
   
-.link-pratos {
+.link-produtos {
   margin-top: 25px;
   text-decoration: none;
   color: #284ea7;
@@ -81,7 +81,7 @@ button:hover {
   transition: color 0.2s;
 }
   
-.link-pratos:hover {
+.link-produtos:hover {
   color: #1d3577;
   text-decoration: underline;
 }
