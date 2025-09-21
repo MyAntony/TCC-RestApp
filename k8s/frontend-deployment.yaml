@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: tcc-frontend
+        # Método recomendado: usar versionamento
+        image: docker.io/myantony/tcc-frontend:1.0.3
+        imagePullPolicy: IfNotPresent
+
+        # Método anterior (com latest):
+        # image: docker.io/myantony/tcc-frontend:latest
+        # imagePullPolicy: IfNotPresent
+        # ou apenas remover a linha de imagePullPolicy
+
+        ports:
+        - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  type: NodePort
+  ports:
+    - port: 3000
+      nodePort: 30000
+  selector:
+    app: frontend

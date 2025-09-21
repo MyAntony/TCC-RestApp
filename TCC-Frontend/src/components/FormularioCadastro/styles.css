@@ -1,0 +1,100 @@
+/* src\components\FormularioCadastro\styles.css */
+
+/* Estilos modernos para o formulário de cadastro */
+.container {
+  background: #fff;
+  padding: 40px 24px 32px 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(40, 78, 167, 0.08), 0 1.5px 4px rgba(0,0,0,0.06);
+  width: 350px;
+  max-width: 95vw;
+  margin: 32px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+  
+.container img {
+  width: 120px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(40, 78, 167, 0.10);
+}
+  
+h2 {
+  font-size: 22px;
+  text-align: center;
+  font-weight: bold;
+  color: #284ea7;
+  margin-bottom: 18px;
+}
+  
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  gap: 14px;
+}
+  
+input,
+button,
+select {
+  width: 100%;
+  padding: 12px 10px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 15px;
+  border: 1.5px solid #d1d5db;
+  background: #f8f9fa;
+  transition: border 0.2s;
+}
+  
+input:focus,
+select:focus {
+  border: 1.5px solid #284ea7;
+  outline: none;
+}
+  
+button {
+  background-color: #284ea7;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  margin-top: 10px;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 8px rgba(40, 78, 167, 0.08);
+}
+  
+button:hover {
+  background-color: #1d3577;
+}
+  
+.link-produtos {
+  margin-top: 25px;
+  text-decoration: none;
+  color: #284ea7;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+  
+.link-produtos:hover {
+  color: #1d3577;
+  text-decoration: underline;
+}
+    
+/* Removidos estilos de .barra-botoes e .com-espaco-topo */
+
+@media (max-width: 500px) {
+  .container {
+    padding: 18px 4vw 18px 4vw;
+    width: 98vw;
+    min-width: unset;
+  }
+  h2 {
+    font-size: 18px;
+  }
+}

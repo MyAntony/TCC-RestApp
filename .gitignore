@@ -1,0 +1,5 @@
+TCC-Frontend/node_modules/
+
+.vscode
+
+target/
