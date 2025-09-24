@@ -24,5 +24,7 @@ public class MetodoPagamento
     
     @Enumerated(EnumType.STRING)
     private BandeiraCartao bandeira; // Pode ser null para métodos não-cartão
+
+    private double taxa; // Pode ser null se não aplicável
     
 }
