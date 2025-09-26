@@ -1,0 +1,49 @@
+/* src\pages\Lista\styles.css
+
+
+.pagina-lista-produtos
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px;
+    background-color: #f4f4f4;
+}
+ 
+.pagina-lista-produtos .container
+{
+    background-color: white;
+    padding: 32px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: center;
+    border-radius: 8px;
+}
+ 
+.pagina-lista-produtos .container h2
+{
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 35px;
+    color: #284ea7;
+}
+ 
+.pagina-lista-produtos .container .link-voltar
+{
+    display: block;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+    color: #f4f4f4;
+    text-decoration: none;
+}
+ 
+.pagina-lista-produtos .container .link-voltar:hover
+{
+    text-decoration: none;
+} */

@@ -1,6 +1,6 @@
 package com.example.aula.controller;
 
-import com.example.aula.model.principal.cliente.Cliente;
+import com.example.aula.model.cliente.Cliente;
 import com.example.aula.service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.http.*;

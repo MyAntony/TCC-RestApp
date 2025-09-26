@@ -1,4 +1,4 @@
-package com.example.aula.model.principal.cliente;
+package com.example.aula.model.cliente;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

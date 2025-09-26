@@ -1,6 +1,7 @@
 package com.example.aula.model.financeiro;
 
 import com.example.aula.model.TipoDocumento;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;

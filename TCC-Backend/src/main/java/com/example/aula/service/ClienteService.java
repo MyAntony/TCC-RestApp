@@ -1,6 +1,6 @@
 package com.example.aula.service;
 
-import com.example.aula.model.principal.cliente.Cliente;
+import com.example.aula.model.cliente.Cliente;
 import com.example.aula.repository.ClienteRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
