@@ -1,4 +1,6 @@
-package com.example.aula.model.cliente;
+package com.example.aula.model.principal.cliente;
+
+import com.example.aula.model.Endereco;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -24,5 +26,8 @@ public class Cliente
     private String telefone;
 
     private String email;
+
+    @Embedded // Indica que o endereço é um campo embutido
+    private Endereco endereco;
 
 }

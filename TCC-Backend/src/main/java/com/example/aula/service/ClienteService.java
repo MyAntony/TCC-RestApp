@@ -1,6 +1,6 @@
 package com.example.aula.service;
 
-import com.example.aula.model.cliente.Cliente;
+import com.example.aula.model.principal.cliente.Cliente;
 import com.example.aula.repository.ClienteRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,8 @@ public class ClienteService
         clienteAtualizar.setCpf(cliente.getCpf());
         clienteAtualizar.setTelefone(cliente.getTelefone());
         clienteAtualizar.setEmail(cliente.getEmail());
-
+        clienteAtualizar.setEndereco(cliente.getEndereco());
+        
         return clienteRepository.save(clienteAtualizar);
     }
 

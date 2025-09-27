@@ -7,7 +7,7 @@ import lombok.*;
 @Entity // Indica que esta classe é uma entidade JPA
 @Getter // Gera os getters
 @Setter // Gera os setters
-@AllArgsConstructor // Gera o construtor com todos os argumentos
+// @AllArgsConstructor // Gera o construtor com todos os argumentos
 @NoArgsConstructor // Gera o construtor sem argumentos
 public class CategoriaContas
 {
@@ -19,5 +19,7 @@ public class CategoriaContas
     private String nomeCategoria;
 
     private String descricaoCategoria;
+
+    
         
 }

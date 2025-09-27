@@ -40,6 +40,8 @@ public class FornecedorService
         fornecedorAtualizar.setCnpj(fornecedor.getCnpj());
         fornecedorAtualizar.setTelefone(fornecedor.getTelefone());
         fornecedorAtualizar.setEmail(fornecedor.getEmail());
+        fornecedorAtualizar.setEndereco(fornecedor.getEndereco());
+
 
         return fornecedorRepository.save(fornecedorAtualizar);
     }
