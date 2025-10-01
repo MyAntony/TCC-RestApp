@@ -12,5 +12,6 @@ public class UsuarioResponseDTO
     private String nome;
     private String email;
     private Cargo cargo;
+    // private String senha; /* Não descomentar, utilizado apenas para aprendizado */
     
 }

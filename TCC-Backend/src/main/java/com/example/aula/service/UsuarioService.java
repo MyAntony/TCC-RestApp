@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.example.aula.dto.UsuarioDTO;
 import com.example.aula.dto.UsuarioResponseDTO;
 import com.example.aula.model.Usuario;
@@ -38,15 +37,12 @@ public class UsuarioService
 
 public List<UsuarioResponseDTO> listarUsuarios()
 {
-    return usuarioRepository.findAll()
-        .stream()
-        .map(this::toDTO)
-        .toList();
+    return usuarioRepository.findAll().stream().map(this::toDTO).toList();
 }
 
 private UsuarioResponseDTO toDTO(Usuario usuario)
 {
-    return new UsuarioResponseDTO(usuario.getNome(), usuario.getEmail(), usuario.getCargo());
+    return new UsuarioResponseDTO(usuario.getNome(), usuario.getEmail()/*,  usuario.getSenha() */, usuario.getCargo());
 }
 
 }

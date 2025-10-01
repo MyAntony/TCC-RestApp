@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.aula.service.UsuarioService;
-
 import jakarta.validation.Valid;
-
 import com.example.aula.dto.UsuarioDTO;
 import com.example.aula.dto.UsuarioResponseDTO;
 
