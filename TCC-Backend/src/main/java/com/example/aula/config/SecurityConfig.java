@@ -3,6 +3,8 @@ package com.example.aula.config;
 import com.example.aula.security.JwtAuthenticationFilter;
 import com.example.aula.security.UsuarioDetailsService;
 
+import java.util.Arrays;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +27,9 @@ public class SecurityConfig
     private final UsuarioDetailsService usuarioDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    @Value("${app.cors.allowed-origins}")
+    private String[] allowedOrigins;
+
     public SecurityConfig(UsuarioDetailsService usuarioDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter)
     {
         this.usuarioDetailsService = usuarioDetailsService;
@@ -35,7 +40,8 @@ public class SecurityConfig
     public CorsConfigurationSource corsConfigurationSource() {
         return request -> {
             CorsConfiguration config = new CorsConfiguration();
-            config.setAllowedOrigins(java.util.List.of("https://restapp-frontend.onrender.com")); // seu frontend
+            config.setAllowedOrigins(Arrays.asList(allowedOrigins)); // usa as origens do properties
+            /*config.setAllowedOrigins(java.util.List.of("https://restapp-frontend.onrender.com")); */ // <-- não mais necessário por causa da linha 30, 31 e 43
             config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
             config.setAllowedHeaders(java.util.List.of("*"));
             config.setAllowCredentials(true); // necessário se usar JWT ou cookies
