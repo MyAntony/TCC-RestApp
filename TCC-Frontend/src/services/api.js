@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   // Coloque aqui a URL base do seu backend Java
-  baseURL: 'http://localhost:8080', 
+  baseURL: /*import.meta.env.VITE_API_URL || */'http://localhost:8080', /* Para funcionar no deploy ou localmente automaticamente */
 });
 
 // Interceptor para adicionar o token a cada requisição (se ele existir)

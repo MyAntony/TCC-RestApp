@@ -15,7 +15,7 @@ spec:
       containers:
       - name: tcc-backend
         # Método recomendado: usar versionamento
-        image: docker.io/myantony/tcc-backend:1.0.0
+        image: myantony/tcc-backend:1.0.3
         imagePullPolicy: IfNotPresent
 
         # Método anterior (com latest):
