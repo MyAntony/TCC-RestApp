@@ -32,6 +32,18 @@ public class SecurityConfig
     }
 
     @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        return request -> {
+            CorsConfiguration config = new CorsConfiguration();
+            config.setAllowedOrigins(java.util.List.of("https://restapp-frontend.onrender.com")); // seu frontend
+            config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+            config.setAllowedHeaders(java.util.List.of("*"));
+            config.setAllowCredentials(true); // necessário se usar JWT ou cookies
+            return config;
+        };
+    }
+
+    @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder()
     {
         return new BCryptPasswordEncoder();
@@ -56,29 +68,33 @@ public class SecurityConfig
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {
         http
-            .csrf(csrf -> csrf.disable()
-            )
-                .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()  // libera login e registro
-                // .requestMatchers("/usuarios/admin/**").hasRole("ADMINISTRADOR")
-                // .requestMatchers("/usuarios/garcom/**").hasRole("GARCOM")
+            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // <--- aqui
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated()
-                
             )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).httpBasic(Customizer.withDefaults());;
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
+    
+    // {
+    //     http
+    //         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+    //         .csrf(csrf -> csrf.disable()
+    //         )
+    //             .authorizeHttpRequests(auth -> auth
+    //             .requestMatchers("/auth/**").permitAll()  // libera login e registro
+    //             // .requestMatchers("/usuarios/admin/**").hasRole("ADMINISTRADOR")
+    //             // .requestMatchers("/usuarios/garcom/**").hasRole("GARCOM")
+    //             .anyRequest().authenticated()
+                
+    //         )
+    //             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).httpBasic(Customizer.withDefaults());;
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        return request -> {
-            CorsConfiguration config = new CorsConfiguration();
-            config.setAllowedOrigins(java.util.List.of("https://restapp-frontend.onrender.com")); // seu frontend
-            config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-            config.setAllowedHeaders(java.util.List.of("*"));
-            config.setAllowCredentials(true); // necessário se usar JWT ou cookies
-            return config;
-        };
-    }
+    //     return http.build();
+    // }
+
 }
