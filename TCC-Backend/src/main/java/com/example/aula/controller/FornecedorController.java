@@ -1,6 +1,8 @@
 package com.example.aula.controller;
 
-import com.example.aula.model.financeiro.Fornecedor;
+import com.example.aula.dto.FornecedorDTO.FornecedorRequestDTO;
+import com.example.aula.dto.FornecedorDTO.FornecedorResponseDTO;
+// import com.example.aula.model.financeiro.Fornecedor;
 import com.example.aula.service.FornecedorService;
 import jakarta.validation.Valid;
 import org.springframework.http.*;
@@ -20,31 +22,36 @@ public class FornecedorController
         this.fornecedorService = fornecedorService;
     }
 
-    @GetMapping
-    public List<Fornecedor> listarTodos()
+    @PostMapping // Create - Crud
+    // @ResponseStatus(HttpStatus.CREATED) /* <-- utilizar caso não queira utilizar o ResponseEntity */
+    public ResponseEntity<Map<String, Object>> salvar(@Valid @RequestBody FornecedorRequestDTO fornecedorRequestDTO)
+    {
+        fornecedorService.salvar(fornecedorRequestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("mensagem", "Fornecedor cadastrado com sucesso!"));
+    }
+
+    @GetMapping // Read - cRud
+    public List<FornecedorResponseDTO> listarTodos()
     {
         return fornecedorService.listarTodos();
     }
 
-    @PostMapping
-    public ResponseEntity<Map<String, Object>> salvar(@Valid @RequestBody Fornecedor fornecedor)
+    @GetMapping("/buscar") // Read com filtro - cRud
+    public List<FornecedorResponseDTO> buscarPorNome(@RequestParam String nomeFantasia)
     {
-        fornecedorService.salvar(fornecedor);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(Map.of("mensagem", "Fornecedor cadastrado com sucesso!"));
+        return fornecedorService.buscarPorNome(nomeFantasia);
     }
 
-    @PutMapping
-    public ResponseEntity<Map<String, Object>> atualizar(@Valid @RequestBody Fornecedor fornecedor)
+    @PutMapping // Update crUd
+    public ResponseEntity<Map<String, Object>> atualizar(@Valid @RequestBody FornecedorRequestDTO fornecedorRequestDTO)
     {
-        fornecedorService.atualizar(fornecedor);
+        fornecedorService.atualizar(fornecedorRequestDTO);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(Map.of("mensagem", "Fornecedor atualizado com sucesso"));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}") // Delete - cruD
     public ResponseEntity<Map<String, Object>> excluir(@PathVariable Long id)
     {
         fornecedorService.excluir(id); 
