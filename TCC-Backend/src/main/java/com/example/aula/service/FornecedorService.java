@@ -1,11 +1,14 @@
 package com.example.aula.service;
 
+import com.example.aula.dto.FornecedorDTO.FornecedorRequestDTO;
+import com.example.aula.dto.FornecedorDTO.FornecedorResponseDTO;
 import com.example.aula.model.financeiro.Fornecedor;
 import com.example.aula.repository.FornecedorRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Validated
@@ -18,41 +21,69 @@ public class FornecedorService
         this.fornecedorRepository = fornecedorRepository;
     }
 
-    public List<Fornecedor> listarTodos()
+    // Create
+    public Fornecedor salvar(@Valid FornecedorRequestDTO fornecedorRequestDTO)
     {
-        return fornecedorRepository.findAll();
-    }
+        Fornecedor fornecedor = new Fornecedor();
+        fornecedor.setNomeFantasia(fornecedorRequestDTO.getNomeFantasia());
+        fornecedor.setRazaoSocial(fornecedorRequestDTO.getRazaoSocial());
+        fornecedor.setTipoDocumento(fornecedorRequestDTO.getTipoDocumento());
+        fornecedor.setCpf(fornecedorRequestDTO.getCpf());
+        fornecedor.setCnpj(fornecedorRequestDTO.getCnpj());
+        fornecedor.setTelefone(fornecedorRequestDTO.getTelefone());
+        fornecedor.setEmail(fornecedorRequestDTO.getEmail());
+        fornecedor.setEndereco(fornecedorRequestDTO.getEndereco());
 
-    public Fornecedor salvar(@Valid Fornecedor fornecedor)
-    {
         return fornecedorRepository.save(fornecedor);
     }
 
-    public Fornecedor atualizar(@Valid Fornecedor fornecedor)
+    // Read
+    public List<FornecedorResponseDTO> listarTodos()
     {
-        Fornecedor fornecedorAtualizar = fornecedorRepository.findById(fornecedor.getId())
+        return fornecedorRepository.findAll()
+                .stream()
+                .map(fornecedor -> new FornecedorResponseDTO(
+                        fornecedor.getNomeFantasia()
+                ))
+                .collect(Collectors.toList());
+    }
+
+    // Read com filtro
+    public List<FornecedorResponseDTO> buscarPorNome(String nomeFantasia)
+    {
+        return fornecedorRepository.findByNomeFantasiaContainingIgnoreCase(nomeFantasia)
+            .stream()
+            .map(fornecedor -> new FornecedorResponseDTO(fornecedor.getNomeFantasia()))
+            .collect(Collectors.toList());
+    }
+
+    // Update
+    public Fornecedor atualizar(@Valid FornecedorRequestDTO fornecedorRequestDTO)
+    {
+        Fornecedor fornecedorAtualizar = fornecedorRepository.findById(fornecedorRequestDTO.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Fornecedor não encontrado."));
 
-        fornecedorAtualizar.setNomeFantasia(fornecedor.getNomeFantasia());
-        fornecedorAtualizar.setRazaoSocial(fornecedor.getRazaoSocial());
-        fornecedorAtualizar.setTipoDocumento(fornecedor.getTipoDocumento());
-        fornecedorAtualizar.setCpf(fornecedor.getCpf());
-        fornecedorAtualizar.setCnpj(fornecedor.getCnpj());
-        fornecedorAtualizar.setTelefone(fornecedor.getTelefone());
-        fornecedorAtualizar.setEmail(fornecedor.getEmail());
-        fornecedorAtualizar.setEndereco(fornecedor.getEndereco());
-
+        fornecedorAtualizar.setNomeFantasia(fornecedorRequestDTO.getNomeFantasia());
+        fornecedorAtualizar.setRazaoSocial(fornecedorRequestDTO.getRazaoSocial());
+        fornecedorAtualizar.setTipoDocumento(fornecedorRequestDTO.getTipoDocumento());
+        fornecedorAtualizar.setCpf(fornecedorRequestDTO.getCpf());
+        fornecedorAtualizar.setCnpj(fornecedorRequestDTO.getCnpj());
+        fornecedorAtualizar.setTelefone(fornecedorRequestDTO.getTelefone());
+        fornecedorAtualizar.setEmail(fornecedorRequestDTO.getEmail());
+        fornecedorAtualizar.setEndereco(fornecedorRequestDTO.getEndereco());
 
         return fornecedorRepository.save(fornecedorAtualizar);
     }
 
+    // Delete
     public void excluir(Long id)
     {
         Fornecedor fornecedorExcluir = fornecedorRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("pedido não encontrado."));
+                .orElseThrow(() -> new RuntimeException("Fornecedor não encontrado."));
         // Verifica se o fornecedor está em estoque antes de excluir
-
-        fornecedorRepository.deleteById(fornecedorExcluir.getId());
+        
+        fornecedorRepository.delete(fornecedorExcluir);
+        // fornecedorRepository.deleteById(fornecedorExcluir.getId());
     }
 
 }
