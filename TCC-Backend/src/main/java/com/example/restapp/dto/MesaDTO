@@ -1,0 +1,43 @@
+
+
+public class MesaDTO {
+
+    private Long id;
+    private int numeroMesa;
+    private int capacidade;
+
+    public MesaDTO() {}
+
+    public MesaDTO() {}
+
+    public MesaDTO(Long id, int numeroMesa, int capacidade) {
+        this.id = id;
+        this.numeroMesa = numeroMesa;
+        this.capacidade = capacidade;
+
+    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        
+        this.id = id;
+    }
+
+    public int getNumeroMesa() {
+        return numeroMesa;
+
+    }
+    public void setNumeroMesa(int numeroMesa) {
+        this.numeroMesa = numeroMesa;
+    }
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
+}
