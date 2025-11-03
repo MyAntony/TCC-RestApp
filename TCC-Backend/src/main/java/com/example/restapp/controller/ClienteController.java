@@ -3,8 +3,7 @@ package com.example.restapp.controller;
 import jakarta.validation.Valid;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-
-import com.example.restapp.model.principal.cliente.Cliente;
+import com.example.restapp.model.principal.Cliente;
 import com.example.restapp.service.ClienteService;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package com.example.restapp.model.principal.cliente;
+package com.example.restapp.model.principal;
 
 import com.example.restapp.model.Endereco;
 
