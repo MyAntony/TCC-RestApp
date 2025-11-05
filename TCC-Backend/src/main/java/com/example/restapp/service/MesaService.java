@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.restapp.dto.MesaRequestDTO;
-import com.example.restapp.dto.MesaResponseDTO;
+import com.example.restapp.dto.MesaDTO.MesaRequestDTO;
+import com.example.restapp.dto.MesaDTO.MesaResponseDTO;
 import com.example.restapp.model.Mesa;
 //import com.example.restapp.model.enums.StatusMesa;
 import com.example.restapp.repository.MesaRepository;

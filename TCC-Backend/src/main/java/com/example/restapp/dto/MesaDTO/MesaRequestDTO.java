@@ -1,4 +1,4 @@
-package com.example.restapp.dto;
+package com.example.restapp.dto.MesaDTO;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;

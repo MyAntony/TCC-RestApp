@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.restapp.dto.MesaRequestDTO;
-import com.example.restapp.dto.MesaResponseDTO;
-
+import com.example.restapp.dto.MesaDTO.MesaRequestDTO;
+import com.example.restapp.dto.MesaDTO.MesaResponseDTO;
 import com.example.restapp.service.MesaService;
 
 @RestController
