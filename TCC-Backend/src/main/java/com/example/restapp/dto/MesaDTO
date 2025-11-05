@@ -8,8 +8,6 @@ public class MesaDTO {
 
     public MesaDTO() {}
 
-    public MesaDTO() {}
-
     public MesaDTO(Long id, int numeroMesa, int capacidade) {
         this.id = id;
         this.numeroMesa = numeroMesa;
