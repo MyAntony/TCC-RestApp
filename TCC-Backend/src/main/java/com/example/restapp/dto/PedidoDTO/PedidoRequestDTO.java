@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor // Gera o construtor sem argumentos
 public class PedidoRequestDTO
 {
-    private Integer mesa;
+    // private Long idMesa;
     private Long idProduto;
     private String descricaoPedido;
     private Integer quantidadeProduto;

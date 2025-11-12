@@ -1,10 +1,9 @@
 package com.example.restapp.service;
 
 import com.example.restapp.dto.PedidoDTO.*;
-import com.example.restapp.model.principal.Pedido;
+import com.example.restapp.model.principal.*;
 import com.example.restapp.model.produtos.Produto;
-import com.example.restapp.repository.PedidoRepository;
-import com.example.restapp.repository.ProdutoRepository;
+import com.example.restapp.repository.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,14 +19,20 @@ public class PedidoService
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    @Autowired
+    private MesaRepository mesaRepository;
+
     // Create
-    public PedidoResponseDTO salvar(@Valid PedidoRequestDTO pedidoRequestDTO)
+    public PedidoResponseDTO salvar(Long idMesa, @Valid PedidoRequestDTO pedidoRequestDTO)
     {
         Produto produto = produtoRepository.findById(pedidoRequestDTO.getIdProduto())
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        Mesa mesaRef = mesaRepository.findById(idMesa)
+            .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
 
         Pedido pedido = new Pedido();
-        pedido.setMesa(pedidoRequestDTO.getMesa());
+        pedido.setMesa(mesaRef);
         pedido.setProduto(produto);
         pedido.setDescricaoPedido(pedidoRequestDTO.getDescricaoPedido());
         pedido.setQuantidadeProduto(pedidoRequestDTO.getQuantidadeProduto()!= null ? pedidoRequestDTO.getQuantidadeProduto() : 1);
@@ -56,15 +61,18 @@ public class PedidoService
     }
 
     // Update
-    public PedidoResponseDTO atualizar(@Valid PedidoRequestDTO pedidoRequestDTO, Long id)
+    public PedidoResponseDTO atualizar(Long idMesa, @Valid PedidoRequestDTO pedidoRequestDTO, Long id)
     {
         Pedido pedidoAtualizar = pedidoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
 
         Produto produto = produtoRepository.findById(pedidoRequestDTO.getIdProduto())
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        
+        Mesa mesaRef = mesaRepository.findById(idMesa)
+            .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
 
-        pedidoAtualizar.setMesa(pedidoRequestDTO.getMesa());
+        pedidoAtualizar.setMesa(mesaRef);
         pedidoAtualizar.setProduto(produto);
         pedidoAtualizar.setDescricaoPedido(pedidoRequestDTO.getDescricaoPedido());
         pedidoAtualizar.setQuantidadeProduto(pedidoRequestDTO.getQuantidadeProduto() != null ? pedidoRequestDTO.getQuantidadeProduto() : pedidoAtualizar.getQuantidadeProduto());
@@ -87,7 +95,7 @@ public class PedidoService
     {
         PedidoResponseDTO pedidoResponseDTO = new PedidoResponseDTO();
         pedidoResponseDTO.setId(pedido.getId());
-        pedidoResponseDTO.setMesa(pedido.getMesa());
+        pedidoResponseDTO.setMesa(pedido.getMesa().getNumeroMesa());
         pedidoResponseDTO.setNomeProduto(pedido.getProduto().getNomeProduto());
         pedidoResponseDTO.setDescricaoPedido(pedido.getDescricaoPedido());
         pedidoResponseDTO.setQuantidadeProduto(pedido.getQuantidadeProduto());

@@ -8,7 +8,7 @@ import com.example.restapp.service.*;
 import jakarta.validation.*;
 
 @RestController
-@RequestMapping("principal/pedidos")
+@RequestMapping("principal/mesas/{idMesa}/pedidos")
 public class PedidoController
 {
     private PedidoService pedidoService;
@@ -19,9 +19,9 @@ public class PedidoController
     }
 
     @PostMapping // Create - Crud
-    public ResponseEntity<Map<String, Object>> salvar(@Valid @RequestBody PedidoRequestDTO pedidoRequestDTO)
+    public ResponseEntity<Map<String, Object>> salvar(@PathVariable("idMesa") Long idMesa, @Valid @RequestBody PedidoRequestDTO pedidoRequestDTO)
     {
-        pedidoService.salvar(pedidoRequestDTO);
+        pedidoService.salvar(idMesa, pedidoRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("mensagem", "Pedido cadastrado com sucesso!"));
     }
 
@@ -38,14 +38,14 @@ public class PedidoController
     }
 
     @PutMapping("/{id}") // Update - crUd
-    public ResponseEntity<Map<String, Object>> atualizar(@PathVariable Long id, @Valid @RequestBody PedidoRequestDTO pedidoRequestDTO)
+    public ResponseEntity<Map<String, Object>> atualizar(@PathVariable("idMesa") Long idMesa, @PathVariable("id") Long id, @Valid @RequestBody PedidoRequestDTO pedidoRequestDTO)
     {
-        pedidoService.atualizar(pedidoRequestDTO, id);
+        pedidoService.atualizar(idMesa, pedidoRequestDTO, id);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("mensagem", "Pedido atualizado com sucesso"));
     }
 
     @DeleteMapping("/{id}") // Delete - cruD
-    public ResponseEntity<Map<String, Object>> excluir(@PathVariable Long id)
+    public ResponseEntity<Map<String, Object>> excluir(@PathVariable("idMesa") Long idMesa, @PathVariable Long id)
     {
         pedidoService.excluir(id); 
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("mensagem", "Pedido excluído com sucesso"));

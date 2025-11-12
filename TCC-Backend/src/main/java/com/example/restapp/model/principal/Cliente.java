@@ -1,7 +1,7 @@
 package com.example.restapp.model.principal;
 
+import java.util.*;
 import com.example.restapp.model.Endereco;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -26,6 +26,9 @@ public class Cliente
     private String telefone;
 
     private String email;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Mesa> mesas;
 
     @Embedded // Indica que o endereço é um campo embutido
     private Endereco endereco;

@@ -1,10 +1,8 @@
 package com.example.restapp.model.enums;
 
-
-public enum StatusMesa {
-    
-    LIVRE,
+public enum StatusMesa
+{
+    DISPONIVEL,
     OCUPADA,
-    RESERVADA,
-    INATIVA
+    FECHAMENTO
 }

@@ -1,7 +1,9 @@
 package com.example.restapp.dto.MesaDTO;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.util.List;
+
+import com.example.restapp.dto.PedidoDTO.PedidoResumoDTO;
 import com.example.restapp.model.enums.StatusMesa;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,13 +14,19 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MesaResponseDTO {
+public class MesaResponseDTO
+{
     private Long id;
+    private String atendenteAbertura;
+    private String nomeAtendenteResponsavel;
     private Integer numeroMesa;
-    private Integer capacidade;
+    private Integer quantidadePessoas;
+    private String nomeCliente;
     private StatusMesa status;
     private LocalDateTime horarioAbertura;
-    private LocalTime horarioFechamento;
-    private String garcomResponsavel;
+    private LocalDateTime horarioFechamento;
+    private List<PedidoResumoDTO> pedidos;
+    private Double valorTotalMesa;
+    private Double valorTotalMesaServico;
 
 }
