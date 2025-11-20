@@ -10,7 +10,6 @@ import com.example.restapp.dto.PedidoDTO.PedidoResumoDTO;
 import com.example.restapp.model.Usuario;
 import com.example.restapp.model.principal.Cliente;
 import com.example.restapp.model.principal.Mesa;
-import com.example.restapp.model.principal.Pedido;
 import com.example.restapp.repository.ClienteRepository;
 import com.example.restapp.repository.MesaRepository;
 import com.example.restapp.repository.UsuarioRepository;
@@ -27,6 +26,10 @@ public class MesaService
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PedidoService pedidoService;
+
 
     // Create
     public MesaResponseDTO salvar(MesaRequestDTO mesaRequestDTO)
@@ -100,23 +103,25 @@ public class MesaService
     // Método auxiliar para converter Mesa em MesaResponseDTO
     private MesaResponseDTO toResponseDTO(Mesa mesa)
     {
-        // Converte os pedidos da mesa para resumos
-        List<PedidoResumoDTO> pedidosDTO;
+        List<PedidoResumoDTO> pedidosDTO = pedidoService.listarPedidosDaMesa(mesa.getId());
 
-        if (mesa.getPedidos() != null)
-        {
-            pedidosDTO = mesa.getPedidos().stream()
-                .map(pedido -> new PedidoResumoDTO
-                (
-                    pedido.getProduto().getNomeProduto(),
-                    pedido.getQuantidadeProduto(),
-                    pedido.getValorUnitario(),
-                    pedido.getValorTotal()
-                )).toList();
-        } else
-        {
-            pedidosDTO = new ArrayList<>(); // lista vazia caso não haja pedidos
-        }
+        // Converte os pedidos da mesa para resumos
+        // List<PedidoResumoDTO> pedidosDTO;
+
+        // if (mesa.getPedidos() != null)
+        // {
+        //     pedidosDTO = mesa.getPedidos().stream()
+        //         .map(pedido -> new PedidoResumoDTO
+        //         (
+        //             pedido.getProduto().getNomeProduto(),
+        //             pedido.getQuantidadeProduto(),
+        //             pedido.getValorUnitario(),
+        //             pedido.getValorTotal()
+        //         )).toList();
+        // } else
+        // {
+        //     pedidosDTO = new ArrayList<>(); // lista vazia caso não haja pedidos
+        // }
         
         // Calcula o valor total da mesa
         double valorTotalMesa = pedidosDTO.stream()

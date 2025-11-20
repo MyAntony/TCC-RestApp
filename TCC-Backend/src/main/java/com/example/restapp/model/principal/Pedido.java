@@ -14,7 +14,7 @@ import lombok.*;
 @EntityListeners(AuditingEntityListener.class) // Habilita o listener de auditoria
 @Getter // Gera os getters
 @Setter // Gera os setters
-@AllArgsConstructor // Gera o construtor com todos os argumentos
+// @AllArgsConstructor // Gera o construtor com todos os argumentos
 @NoArgsConstructor // Gera o construtor sem argumentos
 public class Pedido
 {
@@ -23,18 +23,18 @@ public class Pedido
     private Long id;
 
     @CreatedBy
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false, updatable = false)
     private Usuario usuario;
     
-    @ManyToOne
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mesa_id", nullable = false)
-    @JsonBackReference // Fecha a referência cíclica
     private Mesa mesa;
 
     private String descricaoPedido;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 

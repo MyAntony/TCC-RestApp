@@ -5,6 +5,7 @@ import com.example.restapp.model.principal.*;
 import com.example.restapp.model.produtos.Produto;
 import com.example.restapp.repository.*;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -49,6 +50,24 @@ public class PedidoService
         Pedido pedido = pedidoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
         return toResponseDTO(pedido);
+    }
+
+    // // Read por Mesa
+    // public List<Pedido> listarPorMesa(Long mesaId)
+    // {
+    //     return pedidoRepository.findByMesaId(mesaId);
+    // }
+
+    // Read por Mesa
+    public List<PedidoResumoDTO> listarPedidosDaMesa(Long idMesa)
+    {
+        return pedidoRepository.findByMesaId(idMesa).stream().map(pedido -> new PedidoResumoDTO
+        (
+            pedido.getProduto().getNomeProduto(),
+            pedido.getQuantidadeProduto(),
+            pedido.getValorUnitario(),
+            pedido.getValorTotal()
+        )).toList();
     }
 
     // Read All

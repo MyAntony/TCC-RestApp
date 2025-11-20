@@ -52,8 +52,8 @@ public class Mesa
 
     private LocalDateTime horarioFechamento;
 
-    @OneToMany(mappedBy = "mesa", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pedido> pedidos;
+    // @OneToMany(mappedBy = "mesa")
+    // private List<Pedido> pedidos;
 
     private Double valorTotalMesa;
 
