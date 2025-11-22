@@ -2,14 +2,16 @@ package com.example.restapp.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.restapp.model.Pagamento;
+
+import com.example.restapp.dto.PagamentoDTO;
 import com.example.restapp.service.PagamentoService;
+
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/pagamentos")
-@CrossOrigin(origins = "*") // permite requisições do frontend
+@CrossOrigin(origins = "*")
 public class PagamentoController {
 
     private final PagamentoService pagamentoService;
@@ -18,29 +20,45 @@ public class PagamentoController {
         this.pagamentoService = pagamentoService;
     }
 
-    // ✅ Listar todos os pagamentos
+
+    // ============================================================
+    // LISTAR TODOS OS PAGAMENTOS (DTO)
+    // ============================================================
     @GetMapping
-    public ResponseEntity<List<Pagamento>> listarTodos() {
-        List<Pagamento> pagamentos = pagamentoService.listarPagamentos();
-        return ResponseEntity.ok(pagamentos);
+    public ResponseEntity<List<PagamentoResponseDTO>> listarTodos() {
+        return ResponseEntity.ok(pagamentoService.listarPagamentos());
     }
 
-    // ✅ Buscar pagamento por ID
+
+    // ============================================================
+    // BUSCAR POR ID (DTO)
+    // ============================================================
     @GetMapping("/{id}")
-    public ResponseEntity<Pagamento> buscarPorId(@PathVariable Long id) {
-        Optional<Pagamento> pagamento = pagamentoService.buscarPorId(id);
-        return pagamento.map(ResponseEntity::ok)
-                        .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<PagamentoResponseDTO> buscarPorId(@PathVariable Long id) {
+
+        Optional<PagamentoResponseDTO> pagamento = pagamentoService.buscarPorId(id);
+
+        return pagamento
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // ✅ Criar ou atualizar pagamento
+
+    // ============================================================
+    // CRIAR PAGAMENTO (RequestDTO -> ResponseDTO)
+    // ============================================================
     @PostMapping
-    public ResponseEntity<Pagamento> salvar(@RequestBody Pagamento pagamento) {
-        Pagamento novoPagamento = pagamentoService.salvarPagamento(pagamento);
+    public ResponseEntity<PagamentoResponseDTO> salvar(@RequestBody PagamentoRequestDTO dto) {
+
+        PagamentoResponseDTO novoPagamento = pagamentoService.salvarPagamento(dto);
+
         return ResponseEntity.ok(novoPagamento);
     }
 
-    // ✅ Deletar pagamento
+
+    // ============================================================
+    // DELETAR PAGAMENTO
+    // ============================================================
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         pagamentoService.deletarPagamento(id);
