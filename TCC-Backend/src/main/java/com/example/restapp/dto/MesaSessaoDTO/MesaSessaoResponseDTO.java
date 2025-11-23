@@ -1,4 +1,4 @@
-package com.example.restapp.dto.MesaDTO;
+package com.example.restapp.dto.MesaSessaoDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,12 +16,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MesaResponseDTO
+public class MesaSessaoResponseDTO
 {
     private Long id;
     private String atendenteAbertura;
     private String nomeAtendenteResponsavel;
-    private Integer numeroMesa;
+    private Long numeroMesa;
     private Integer quantidadePessoas;
     private String nomeCliente;
     private StatusMesa status;

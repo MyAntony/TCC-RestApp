@@ -29,8 +29,8 @@ public class Pedido
     
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mesa_id", nullable = false)
-    private Mesa mesa;
+    @JoinColumn(name = "mesa_sessao_id", nullable = false)
+    private MesaSessao mesaSessao;
 
     private String descricaoPedido;
 

@@ -4,7 +4,6 @@ import java.util.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import com.example.restapp.dto.PedidoDTO.*;
-import com.example.restapp.model.principal.Pedido;
 import com.example.restapp.service.*;
 import jakarta.validation.*;
 

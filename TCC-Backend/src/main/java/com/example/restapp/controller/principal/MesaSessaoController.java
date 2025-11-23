@@ -1,24 +1,27 @@
 package com.example.restapp.controller.principal;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import com.example.restapp.dto.MesaDTO.*;
-import com.example.restapp.service.MesaService;
+
+import com.example.restapp.dto.MesaSessaoDTO.*;
+import com.example.restapp.service.MesaSessaoService;
 
 @RestController
 @RequestMapping("principal/mesas")
 @CrossOrigin(origins = "*")
-public class MesaController
+public class MesaSessaoController
 {
     @Autowired
-    private MesaService mesaService;
+    private MesaSessaoService mesaService;
 
     // Create
     @PostMapping
-    public ResponseEntity<MesaResponseDTO> criarMesa(@RequestBody MesaRequestDTO mesaRequestDTO)
+    public ResponseEntity<MesaSessaoResponseDTO> criarMesa(@RequestBody MesaSessaoRequestDTO mesaRequestDTO)
     {
-        MesaResponseDTO mesaResponseDTO = mesaService.salvar(mesaRequestDTO);
+        MesaSessaoResponseDTO mesaResponseDTO = mesaService.salvar(mesaRequestDTO);
         return new ResponseEntity<>(mesaResponseDTO, HttpStatus.CREATED);
     }
 
@@ -32,17 +35,25 @@ public class MesaController
 
     // Read
     @GetMapping("/{id}")
-    public ResponseEntity<MesaResponseDTO> obterMesaPorId(@PathVariable Long id)
+    public ResponseEntity<MesaSessaoResponseDTO> obterMesaPorId(@PathVariable Long id)
     {
-        MesaResponseDTO mesaResponseDTO = mesaService.obterPorId(id);
+        MesaSessaoResponseDTO mesaResponseDTO = mesaService.obterPorId(id);
         return new ResponseEntity<>(mesaResponseDTO, HttpStatus.OK);
+    }
+
+    // Read todas as mesas
+    @GetMapping("/abertas")
+    public ResponseEntity<List<MesaSessaoResponseDTO>> listarMesasAbertas()
+    {
+        List<MesaSessaoResponseDTO> mesas = mesaService.listarMesasAbertas();
+        return new ResponseEntity<>(mesas, HttpStatus.OK);
     }
 
     // Update
     @PutMapping("/{id}")
-    public ResponseEntity<MesaResponseDTO> atualizarMesa(@PathVariable Long id, @RequestBody MesaRequestDTO mesaRequestDTO)
+    public ResponseEntity<MesaSessaoResponseDTO> atualizarMesa(@PathVariable Long id, @RequestBody MesaSessaoRequestDTO mesaRequestDTO)
     {
-        MesaResponseDTO mesaResponseDTO = mesaService.atualizar(id, mesaRequestDTO);
+        MesaSessaoResponseDTO mesaResponseDTO = mesaService.atualizar(id, mesaRequestDTO);
         return new ResponseEntity<>(mesaResponseDTO, HttpStatus.OK);
     }
 

@@ -1,4 +1,4 @@
-package com.example.restapp.dto.MesaDTO;
+package com.example.restapp.dto.MesaSessaoDTO;
 
 import com.example.restapp.model.enums.StatusMesa;
 import lombok.AllArgsConstructor;
@@ -10,10 +10,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MesaRequestDTO
+public class MesaSessaoRequestDTO
 {
     private Long idAtendenteResponsavel;
-    private Integer numeroMesa;
+    private Long numeroMesa;
     private Integer quantidadePessoas;
     private Long idCliente;
     private StatusMesa status;
