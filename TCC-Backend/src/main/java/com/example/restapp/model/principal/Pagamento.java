@@ -1,4 +1,4 @@
-package com.example.restapp.model;
+package com.example.restapp.model.principal;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,7 +7,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import com.example.restapp.model.principal.Mesa;
+
+import com.example.restapp.model.Usuario;
 import com.example.restapp.model.financeiro.MetodoPagamento;
 
 @Entity
@@ -17,31 +18,28 @@ import com.example.restapp.model.financeiro.MetodoPagamento;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pagamento {
+public class Pagamento
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double valorPagamento;
-
+    @CreatedBy
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "mesa_id", nullable = false)
-    private Mesa mesa;
+    @JoinColumn(name = "mesa_sessao_id", nullable = false)
+    private MesaSessao mesaSessao;
+
+    private BigDecimal valorPagamento;
 
     @ManyToOne
     @JoinColumn(name = "metodo_pagamento_id", nullable = false)
     private MetodoPagamento metodoPagamento;
 
-    @CreatedBy
-    @Column(updatable = false)
-    private String criadoPor;
-
     @CreatedDate
-    @Column(nullable = false, updatable = false)
     private LocalDateTime horarioLancamento;
 }

@@ -1,26 +1,20 @@
-package com.example.restapp.model.dto.pagamento;
+package com.example.restapp.dto.PagamentoDTO;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class PagamentoResponseDTO {
+public class PagamentoResponseDTO
+{
 
     private Long id;
-    private Double valorPagamento;
-
-    private Long usuarioId;
-    private String usuarioNome;
-
-    private Long mesaId;
-    private Integer numeroMesa;
-
-    private Long metodoPagamentoId;
+    private String usuario;
+    private Long numeroMesa;
+    private BigDecimal valorPagamento;
     private String nomeMetodoPagamento;
-
-    private String criadoPor;
     private LocalDateTime horarioLancamento;
 }

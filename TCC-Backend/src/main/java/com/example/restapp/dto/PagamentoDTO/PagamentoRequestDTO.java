@@ -1,15 +1,14 @@
-package com.example.restapp.model.dto.pagamento;
+package com.example.restapp.dto.PagamentoDTO;
 
+import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PagamentoRequestDTO {
-
-    private Double valorPagamento;
-    private Long usuarioId;
-    private Long mesaId;
+public class PagamentoRequestDTO
+{
+    private BigDecimal valorPagamento;
     private Long metodoPagamentoId;
 
 }
