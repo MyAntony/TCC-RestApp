@@ -20,7 +20,7 @@ public class Produto
     @NotBlank(message = "O nome do produto é obrigatorio.")
     private String nomeProduto;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id", nullable = false)
     private CategoriaProdutos categoriaProdutos;
 

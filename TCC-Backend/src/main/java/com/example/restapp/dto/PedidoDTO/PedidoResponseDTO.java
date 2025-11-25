@@ -11,7 +11,7 @@ public class PedidoResponseDTO
 {
     private Long id;
     private String nomeUsuario;
-    private Integer mesa;
+    private Long mesa;
     private String nomeProduto;
     private String descricaoPedido;
     private Integer quantidadeProduto;
