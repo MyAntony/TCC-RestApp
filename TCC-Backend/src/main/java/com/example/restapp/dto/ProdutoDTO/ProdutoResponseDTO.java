@@ -1,5 +1,7 @@
 package com.example.restapp.dto.ProdutoDTO;
 
+import java.math.BigDecimal;
+
 import lombok.*;
 
 @Getter
@@ -11,8 +13,8 @@ public class ProdutoResponseDTO
     private Long id;
     private String nomeProduto;
     private String nomeCateogria;
-    private Double precoCusto;
-    private Double precoVenda;
+    private BigDecimal precoCusto;
+    private BigDecimal precoVenda;
     private String descricao;
     private byte[] imagem;
 

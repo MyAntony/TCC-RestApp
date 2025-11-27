@@ -1,4 +1,4 @@
-package com.example.restapp.dto;
+package com.example.restapp.dto.UsuarioDTO;
 
 import com.example.restapp.model.Cargo;
 
@@ -10,7 +10,7 @@ import lombok.*;
 @Setter // Gera os setters
 @AllArgsConstructor // Gera o construtor com todos os argumentos
 @NoArgsConstructor // Gera o construtor sem argumentos
-public class UsuarioDTO
+public class UsuarioRequestDTO
 {
     @NotBlank(message = "O nome é obrigatório")
     private String nome;
@@ -24,6 +24,4 @@ public class UsuarioDTO
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Cargo cargo;
-
-    
 }

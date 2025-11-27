@@ -1,14 +1,27 @@
 package com.example.restapp.model.principal;
 
+import java.math.BigDecimal;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import com.example.restapp.model.Usuario;
 import com.example.restapp.model.produtos.Produto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity // Indica que a classe é uma entidade JPA
 @EntityListeners(AuditingEntityListener.class) // Habilita o listener de auditoria
@@ -41,10 +54,10 @@ public class Pedido
     private Integer quantidadeProduto = 1;
 
     @Column(nullable = false)
-    private Double valorUnitario;
+    private BigDecimal valorUnitario;
 
     @Column(nullable = false)
-    private Double valorTotal;
+    private BigDecimal valorTotal;
 
     @Column(nullable = false, updatable = false)
     @CreatedDate

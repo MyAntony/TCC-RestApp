@@ -1,6 +1,8 @@
 package com.example.restapp.model.produtos;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -26,10 +28,10 @@ public class Produto
 
     @NotNull(message = "O preço de custo do produto é obrigatório.")
     @Min(value = 0, message = "O preço de custo não pode ser negativo.")
-    private Double precoCusto;
+    private BigDecimal precoCusto;
 
     @NotNull(message = "O preço de venda do produto é obrigatório.")
-    private Double precoVenda;
+    private BigDecimal precoVenda;
 
     private String descricao;
     

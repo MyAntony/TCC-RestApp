@@ -1,5 +1,7 @@
 package com.example.restapp.dto.ProdutoDTO;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,6 @@ public class ProdutoResumoDTO
 {
     private Long id;
     private String nomeProduto;
-    private Double precoUnitario;
-    private Double precoVenda;
+    private BigDecimal precoUnitario;
+    private BigDecimal precoVenda;
 }

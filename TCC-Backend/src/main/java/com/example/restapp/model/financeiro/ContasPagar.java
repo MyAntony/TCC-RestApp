@@ -1,5 +1,6 @@
 package com.example.restapp.model.financeiro;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -32,7 +33,7 @@ public class ContasPagar
 
     @NotNull(message = "O valor é obrigatório.")
     @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que zero.")
-    private Double valor;
+    private BigDecimal valor;
 
     private LocalDate dataPagamento;
     

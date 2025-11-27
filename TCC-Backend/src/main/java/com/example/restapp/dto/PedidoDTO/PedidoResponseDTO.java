@@ -1,5 +1,6 @@
 package com.example.restapp.dto.PedidoDTO;
 
+import java.math.BigDecimal;
 import java.time.*;
 import lombok.*;
 
@@ -15,7 +16,7 @@ public class PedidoResponseDTO
     private String nomeProduto;
     private String descricaoPedido;
     private Integer quantidadeProduto;
-    private Double valorUnitario;
-    private Double valorTotal;
+    private BigDecimal valorUnitario;
+    private BigDecimal valorTotal;
     private LocalDateTime horarioLancamento;
 }

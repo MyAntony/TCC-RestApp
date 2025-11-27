@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.restapp.dto.UsuarioDTO;
-import com.example.restapp.dto.UsuarioResponseDTO;
+import com.example.restapp.dto.UsuarioDTO.UsuarioRequestDTO;
+import com.example.restapp.dto.UsuarioDTO.UsuarioResponseDTO;
 import com.example.restapp.service.UsuarioService;
 
 import jakarta.validation.Valid;
@@ -37,7 +37,7 @@ public class UsuarioController
     }
 
     @PostMapping
-    public ResponseEntity<Map<Object, String>> salvarUsuario(@Valid @RequestBody UsuarioDTO dto)
+    public ResponseEntity<Map<Object, String>> salvarUsuario(@Valid @RequestBody UsuarioRequestDTO dto)
     {
         usuarioService.salvarUsuario(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("message", "Usuário cadastrado com sucesso!"));

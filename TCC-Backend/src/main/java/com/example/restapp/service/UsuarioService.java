@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.restapp.dto.UsuarioDTO;
-import com.example.restapp.dto.UsuarioResponseDTO;
+import com.example.restapp.dto.UsuarioDTO.UsuarioRequestDTO;
+import com.example.restapp.dto.UsuarioDTO.UsuarioResponseDTO;
 import com.example.restapp.model.Usuario;
 import com.example.restapp.repository.UsuarioRepository;
 
@@ -22,7 +22,7 @@ public class UsuarioService
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public Usuario salvarUsuario(UsuarioDTO dto)
+    public Usuario salvarUsuario(UsuarioRequestDTO dto)
     {
         usuarioRepository.findByEmail(dto.getEmail())
             .ifPresent(u -> { throw new IllegalArgumentException("E-mail já cadastrado!"); });

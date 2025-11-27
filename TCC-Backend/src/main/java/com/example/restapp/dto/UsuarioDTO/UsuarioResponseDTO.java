@@ -1,4 +1,4 @@
-package com.example.restapp.dto;
+package com.example.restapp.dto.UsuarioDTO;
 
 import com.example.restapp.model.Cargo;
 
@@ -13,5 +13,4 @@ public class UsuarioResponseDTO
     private String nome;
     private String email;
     private Cargo cargo;
-    
 }

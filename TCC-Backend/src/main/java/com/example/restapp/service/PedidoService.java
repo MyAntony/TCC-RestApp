@@ -1,14 +1,18 @@
 package com.example.restapp.service;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.example.restapp.dto.PedidoDTO.*;
 import com.example.restapp.model.principal.*;
 import com.example.restapp.model.produtos.Produto;
 import com.example.restapp.repository.*;
+
 import jakarta.validation.Valid;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 @Service
 @Validated
@@ -38,7 +42,7 @@ public class PedidoService
         pedido.setDescricaoPedido(pedidoRequestDTO.getDescricaoPedido());
         pedido.setQuantidadeProduto(pedidoRequestDTO.getQuantidadeProduto()!= null ? pedidoRequestDTO.getQuantidadeProduto() : 1);
         pedido.setValorUnitario(produto.getPrecoVenda());
-        pedido.setValorTotal(pedido.getValorUnitario() * pedido.getQuantidadeProduto());
+        pedido.setValorTotal(pedido.getValorUnitario().multiply(new BigDecimal(pedido.getQuantidadeProduto())));
 
         return toResponseDTO(pedidoRepository.save(pedido));
 
@@ -96,7 +100,7 @@ public class PedidoService
         pedidoAtualizar.setDescricaoPedido(pedidoRequestDTO.getDescricaoPedido());
         pedidoAtualizar.setQuantidadeProduto(pedidoRequestDTO.getQuantidadeProduto() != null ? pedidoRequestDTO.getQuantidadeProduto() : pedidoAtualizar.getQuantidadeProduto());
         pedidoAtualizar.setValorUnitario(produto.getPrecoVenda());
-        pedidoAtualizar.setValorTotal(pedidoAtualizar.getValorUnitario() * pedidoAtualizar.getQuantidadeProduto());
+        pedidoAtualizar.setValorTotal(pedidoAtualizar.getValorUnitario().multiply(new BigDecimal(pedidoAtualizar.getQuantidadeProduto())));
 
         return toResponseDTO(pedidoRepository.save(pedidoAtualizar));
     }

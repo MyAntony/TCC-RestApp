@@ -1,11 +1,14 @@
 package com.example.restapp.service;
 
+import java.math.BigDecimal;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.restapp.dto.MesaSessaoDTO.MesaSessaoRequestDTO;
 import com.example.restapp.dto.MesaSessaoDTO.MesaSessaoResponseDTO;
+import com.example.restapp.dto.PagamentoDTO.PagamentoResponseDTO;
 import com.example.restapp.dto.PedidoDTO.PedidoResumoDTO;
 import com.example.restapp.model.Usuario;
 import com.example.restapp.model.enums.StatusMesa;
@@ -13,9 +16,9 @@ import com.example.restapp.model.principal.Cliente;
 import com.example.restapp.model.principal.Mesa;
 import com.example.restapp.model.principal.MesaSessao;
 import com.example.restapp.repository.ClienteRepository;
+import com.example.restapp.repository.MesaRepository;
 import com.example.restapp.repository.MesaSessaoRepository;
 import com.example.restapp.repository.UsuarioRepository;
-import com.example.restapp.repository.MesaRepository;
 
 @Service
 public class MesaSessaoService
@@ -36,6 +39,8 @@ public class MesaSessaoService
     @Autowired
     private MesaRepository mesaRepository;
 
+    @Autowired
+    private PagamentoService pagamentoService;
 
     // Create
     public MesaSessaoResponseDTO salvar(MesaSessaoRequestDTO MesaSessaoRequestDTO)
@@ -96,10 +101,118 @@ public class MesaSessaoService
         }
         
         Cliente cliente = null;
+
         if (MesaSessaoRequestDTO.getIdCliente() != null)
         {
             cliente = clienteRepository.findById(MesaSessaoRequestDTO.getIdCliente()).orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
         }
+
+        BigDecimal valorTotalMesa = pedidoService.listarPedidosDaMesa(id)
+        .stream()
+        .map(PedidoResumoDTO::getValorTotal)
+        .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal taxaServico;
+
+        if (MesaSessaoRequestDTO.getTaxaServico() == null)
+        {
+            taxaServico = valorTotalMesa.multiply(new BigDecimal("0.10")); // Alterar para uma configuração que possa ser alterada pelo usuário no futuro
+            mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
+        } else
+        {
+            taxaServico = MesaSessaoRequestDTO.getTaxaServico();
+        }
+
+        mesaExistente.setTaxaServico(taxaServico);
+
+        // mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
+
+
+        if (MesaSessaoRequestDTO.getStatus() == StatusMesa.FECHADA)
+        {
+            // // Calcular total da mesa
+            // BigDecimal valorTotalMesa = pedidoService.listarPedidosDaMesa(id)
+            // .stream()
+            // .map(PedidoResumoDTO::getValorTotal)
+            // .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+            // BigDecimal taxaServico;
+
+            // if (MesaSessaoRequestDTO.getTaxaServico() == null)
+            // {
+            //     taxaServico = valorTotalMesa.multiply(new BigDecimal("0.10")); // Alterar para uma configuração que possa ser alterada pelo usuário no futuro
+            // } else
+            // {
+            //     taxaServico = MesaSessaoRequestDTO.getTaxaServico();
+            // }
+
+            // Salvar taxa na mesa
+            mesaExistente.setTaxaServico(taxaServico);
+
+            // // Calcular total com serviço
+            // BigDecimal valorTotalMesaServico = valorTotalMesa.add(taxaServico);
+
+            // Calcular pagamentos já realizados
+            BigDecimal totalPagamentos = pagamentoService.listarPagamentosPorMesa(id)
+                .stream()
+                .map(PagamentoResponseDTO::getValorPagamento)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+            // Validar pagamento mínimo
+            if (totalPagamentos.compareTo(valorTotalMesa) < 0)
+            {
+                BigDecimal falta = valorTotalMesa.subtract(totalPagamentos);
+                throw new RuntimeException("Não é possível fechar a mesa. Ainda faltam R$ " +  String.format("%.2f", falta));
+            }
+
+            // Calcula o quanto sobra após pagar a mesa
+            BigDecimal sobressalente = totalPagamentos.subtract(valorTotalMesa);
+
+            // Se não pagou nada da taxa
+            if (sobressalente.compareTo(BigDecimal.ZERO) == 0)
+            {
+                // Taxa não paga
+                mesaExistente.setTaxaServico(taxaServico);
+                mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
+            }
+
+            // Se pagou parte da taxa
+            else if (sobressalente.compareTo(taxaServico) < 0)
+            {
+                // Pagou parcialmente
+                mesaExistente.setTaxaServico(taxaServico); // taxa inteira prevista
+                mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
+            }
+
+            // Se pagou exatamente a taxa
+            else if (sobressalente.compareTo(taxaServico) == 0)
+            {
+                mesaExistente.setTaxaServico(taxaServico);
+                mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
+            }
+
+            // Se pagou mais do que a taxa (excedente)
+            else
+            {
+                // Quanto excedeu após pagar taxa
+                BigDecimal excedente = sobressalente.subtract(taxaServico);
+
+                // soma o excedente como gorjeta adicional
+                BigDecimal novaTaxa = taxaServico.add(excedente);
+
+                mesaExistente.setTaxaServico(novaTaxa);
+                mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(novaTaxa));
+            }
+
+            mesaExistente.setHorarioFechamento(java.time.LocalDateTime.now());
+            mesaExistente.setValorTotalMesa(valorTotalMesa);
+            // mesaExistente.setValorTotalMesaServico(valorTotalMesaServico);
+        }
+        // // Se o usuário não enviou taxa, calcula 10%
+        // if (MesaSessaoRequestDTO.getTaxaServico() == null)
+        // {
+        //     BigDecimal taxaServico = valorTotalMesa.multiply(new BigDecimal("0.10"));
+        // }
 
         Mesa mesa = mesaRepository.findById(MesaSessaoRequestDTO.getNumeroMesa()).orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
         
@@ -108,6 +221,7 @@ public class MesaSessaoService
         mesaExistente.setStatus(MesaSessaoRequestDTO.getStatus());
         mesaExistente.setAtendenteResponsavel(atendenteResponsavel);
         mesaExistente.setCliente(cliente);
+        // mesaExistente.setTaxaServico(MesaSessaoRequestDTO.getTaxaServico());
         return toResponseDTO(mesaSessaoRepository.save(mesaExistente));
     }
 
@@ -123,32 +237,13 @@ public class MesaSessaoService
     private MesaSessaoResponseDTO toResponseDTO(MesaSessao mesaSessao)
     {
         List<PedidoResumoDTO> pedidosDTO = pedidoService.listarPedidosDaMesa(mesaSessao.getId());
-
-        // Converte os pedidos da mesa para resumos
-        // List<PedidoResumoDTO> pedidosDTO;
-
-        // if (mesa.getPedidos() != null)
-        // {
-        //     pedidosDTO = mesa.getPedidos().stream()
-        //         .map(pedido -> new PedidoResumoDTO
-        //         (
-        //             pedido.getProduto().getNomeProduto(),
-        //             pedido.getQuantidadeProduto(),
-        //             pedido.getValorUnitario(),
-        //             pedido.getValorTotal()
-        //         )).toList();
-        // } else
-        // {
-        //     pedidosDTO = new ArrayList<>(); // lista vazia caso não haja pedidos
-        // }
+        List<PagamentoResponseDTO> pagamentosDTO = pagamentoService.listarPagamentosPorMesa(mesaSessao.getId());
         
-        // Calcula o valor total da mesa
-        double valorTotalMesa = pedidosDTO.stream()
-            .mapToDouble(PedidoResumoDTO::getValorTotal)
-            .sum();
+        // Calcula o total dos pedidos
+        BigDecimal valorTotalMesa = pedidosDTO.stream().map(PedidoResumoDTO::getValorTotal)
+        .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // Adiciona taxa de serviço (por exemplo, 10%)
-        double valorTotalMesaServico = valorTotalMesa * 1.10;
+        BigDecimal valorTotalMesaServico = mesaSessao.getValorTotalMesaServico();
 
         // Monta o DTO final
         MesaSessaoResponseDTO MesaSessaoResponseDTO = new MesaSessaoResponseDTO();
@@ -162,7 +257,9 @@ public class MesaSessaoService
         MesaSessaoResponseDTO.setHorarioAbertura(mesaSessao.getHorarioAbertura());
         MesaSessaoResponseDTO.setHorarioFechamento(mesaSessao.getHorarioFechamento());
         MesaSessaoResponseDTO.setPedidos(pedidosDTO);
+        MesaSessaoResponseDTO.setPagamentos(pagamentosDTO);
         MesaSessaoResponseDTO.setValorTotalMesa(valorTotalMesa);
+        MesaSessaoResponseDTO.setTaxaServico(mesaSessao.getTaxaServico());
         MesaSessaoResponseDTO.setValorTotalMesaServico(valorTotalMesaServico);
 
         return MesaSessaoResponseDTO;

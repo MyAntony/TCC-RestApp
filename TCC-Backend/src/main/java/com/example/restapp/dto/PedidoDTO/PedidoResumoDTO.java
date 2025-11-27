@@ -1,5 +1,7 @@
 package com.example.restapp.dto.PedidoDTO;
 
+import java.math.BigDecimal;
+
 import lombok.*;
 
 @Getter // Gera os getters
@@ -10,6 +12,6 @@ public class PedidoResumoDTO
 {
     private String nomeProduto;
     private Integer quantidade;
-    private Double valorUnitario;
-    private Double valorTotal;
+    private BigDecimal valorUnitario;
+    private BigDecimal valorTotal;
 }

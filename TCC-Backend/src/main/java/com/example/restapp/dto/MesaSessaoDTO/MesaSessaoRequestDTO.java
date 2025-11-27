@@ -1,5 +1,7 @@
 package com.example.restapp.dto.MesaSessaoDTO;
 
+import java.math.BigDecimal;
+
 import com.example.restapp.model.enums.StatusMesa;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,5 +19,6 @@ public class MesaSessaoRequestDTO
     private Integer quantidadePessoas;
     private Long idCliente;
     private StatusMesa status;
+    private BigDecimal taxaServico;
     
 }
