@@ -11,4 +11,5 @@ public interface MesaSessaoRepository extends JpaRepository<MesaSessao, Long>
 {
     List<MesaSessao> findByStatus(StatusMesa statusMesa);
     List<MesaSessao> findByStatusIn(List<StatusMesa> statusMesa);
+    boolean existsByMesaIdAndStatusIn(Long mesaId, List<StatusMesa> status);
 }

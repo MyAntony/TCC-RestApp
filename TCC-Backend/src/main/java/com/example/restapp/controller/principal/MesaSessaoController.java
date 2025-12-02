@@ -1,6 +1,7 @@
 package com.example.restapp.controller.principal;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -43,9 +44,9 @@ public class MesaSessaoController
 
     // Read todas as mesas
     @GetMapping("/abertas")
-    public ResponseEntity<List<MesaSessaoResponseDTO>> listarMesasAbertas()
+    public ResponseEntity<List<Map<String, Object>>> listarMesasAbertas()
     {
-        List<MesaSessaoResponseDTO> mesas = mesaService.listarMesasAbertas();
+        List<Map<String, Object>> mesas = mesaService.listarMesasAbertas();
         return new ResponseEntity<>(mesas, HttpStatus.OK);
     }
 

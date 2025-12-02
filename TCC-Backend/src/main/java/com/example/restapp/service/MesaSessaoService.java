@@ -1,7 +1,10 @@
 package com.example.restapp.service;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +63,15 @@ public class MesaSessaoService
 
         Mesa mesa = mesaRepository.findById(MesaSessaoRequestDTO.getNumeroMesa()).orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
 
+        List<StatusMesa> statusAbertos = Arrays.asList(StatusMesa.OCUPADA, StatusMesa.FECHAMENTO);
+
+        boolean existeSessaoAberta = mesaSessaoRepository.existsByMesaIdAndStatusIn(MesaSessaoRequestDTO.getNumeroMesa(), statusAbertos);
+
+        if (existeSessaoAberta)
+        {
+            throw new RuntimeException("Já existe uma sessão ativa para esta mesa.");
+        }
+
         MesaSessao mesaSessao = new MesaSessao();
         mesaSessao.setMesa(mesa);
         mesaSessao.setQuantidadePessoas(MesaSessaoRequestDTO.getQuantidadePessoas());
@@ -79,13 +91,35 @@ public class MesaSessaoService
     }
 
     // Read todas as mesas
-    public List<MesaSessaoResponseDTO> listarMesasAbertas()
+    // public List<MesaSessaoResponseDTO> listarMesasAbertas()
+    // {
+    //     List<MesaSessao> mesas = mesaSessaoRepository.findByStatusIn(List.of(StatusMesa.OCUPADA, StatusMesa.FECHAMENTO));
+
+    //     return mesas.stream().map(this::toResponseDTO).toList();
+    // }
+
+    public List<Map<String, Object>> listarMesasAbertas()
     {
         List<MesaSessao> mesas = mesaSessaoRepository.findByStatusIn(List.of(StatusMesa.OCUPADA, StatusMesa.FECHAMENTO));
 
-        return mesas.stream().map(this::toResponseDTO).toList();
-    }
+        return mesas.stream().map(mesa ->
+        {
+            Map<String, Object> mapa = new HashMap<>();
 
+            mapa.put("status", mesa.getStatus());
+            mapa.put("numeroMesa", mesa.getMesa().getId());
+
+            String nomeCliente = null;
+            if (mesa.getCliente() != null)
+            {
+                nomeCliente = mesa.getCliente().getNome();
+            }
+
+            mapa.put("nomeCliente", nomeCliente);
+
+                return mapa;
+        }).toList();
+    }
 
     // Update
     public MesaSessaoResponseDTO atualizar(Long id, MesaSessaoRequestDTO MesaSessaoRequestDTO)
@@ -111,6 +145,8 @@ public class MesaSessaoService
         .stream()
         .map(PedidoResumoDTO::getValorTotal)
         .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        mesaExistente.setValorTotalMesa(valorTotalMesa); // A jamanta esqueceu de colocar pra enviar o valor total da mesa ao atualizar
 
         BigDecimal taxaServico;
 
@@ -215,6 +251,15 @@ public class MesaSessaoService
         // }
 
         Mesa mesa = mesaRepository.findById(MesaSessaoRequestDTO.getNumeroMesa()).orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
+
+        List<StatusMesa> statusAbertos = Arrays.asList(StatusMesa.OCUPADA, StatusMesa.FECHAMENTO);
+
+        boolean existeSessaoAberta = mesaSessaoRepository.existsByMesaIdAndStatusIn(MesaSessaoRequestDTO.getNumeroMesa(), statusAbertos);
+
+        if (existeSessaoAberta)
+        {
+            throw new RuntimeException("Já existe uma sessão ativa para esta mesa.");
+        }
         
         mesaExistente.setMesa(mesa);
         mesaExistente.setQuantidadePessoas(MesaSessaoRequestDTO.getQuantidadePessoas());
@@ -240,8 +285,8 @@ public class MesaSessaoService
         List<PagamentoResponseDTO> pagamentosDTO = pagamentoService.listarPagamentosPorMesa(mesaSessao.getId());
         
         // Calcula o total dos pedidos
-        BigDecimal valorTotalMesa = pedidosDTO.stream().map(PedidoResumoDTO::getValorTotal)
-        .reduce(BigDecimal.ZERO, BigDecimal::add);
+        // BigDecimal valorTotalMesa = pedidosDTO.stream().map(PedidoResumoDTO::getValorTotal)
+        // .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         BigDecimal valorTotalMesaServico = mesaSessao.getValorTotalMesaServico();
 
@@ -258,7 +303,7 @@ public class MesaSessaoService
         MesaSessaoResponseDTO.setHorarioFechamento(mesaSessao.getHorarioFechamento());
         MesaSessaoResponseDTO.setPedidos(pedidosDTO);
         MesaSessaoResponseDTO.setPagamentos(pagamentosDTO);
-        MesaSessaoResponseDTO.setValorTotalMesa(valorTotalMesa);
+        MesaSessaoResponseDTO.setValorTotalMesa(mesaSessao.getValorTotalMesa());
         MesaSessaoResponseDTO.setTaxaServico(mesaSessao.getTaxaServico());
         MesaSessaoResponseDTO.setValorTotalMesaServico(valorTotalMesaServico);
 
