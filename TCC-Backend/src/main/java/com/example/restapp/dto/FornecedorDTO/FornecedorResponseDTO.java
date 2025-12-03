@@ -8,5 +8,6 @@ import lombok.*;
 @NoArgsConstructor // Gera o construtor sem argumentos
 public class FornecedorResponseDTO
 {
+    private Long id;
     private String nomeFantasia;
 }

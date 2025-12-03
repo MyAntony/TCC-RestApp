@@ -1,12 +1,15 @@
 package com.example.restapp.security;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
@@ -34,7 +37,7 @@ public class AuthController
         Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(email, senha));
 
         UsuarioPrincipal user = (UsuarioPrincipal) auth.getPrincipal();
-        String token = jwtUtil.gerarToken(user.getUsername());
+        String token = jwtUtil.gerarToken(user.getUsuario());
 
         return ResponseEntity.ok(Map.of("token", token));
 

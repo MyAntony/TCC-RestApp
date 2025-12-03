@@ -1,16 +1,17 @@
 package com.example.restapp.security;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import java.io.IOException;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter
@@ -35,22 +36,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter
         String token = null;
         String username = null;
 
-        // Verifica se o token está presente e começa com "Bearer "
-        if (authHeader != null && authHeader.startsWith("Bearer "))
-        {
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
             token = authHeader.substring(7);
             username = jwtUtil.getUsername(token);
         }
 
-        // Se username estiver presente e não houver autenticação no contexto
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
             var userDetails = usuarioDetailsService.loadUserByUsername(username);
 
-            if (jwtUtil.validarToken(token))
-            {
+            if (jwtUtil.validarToken(token)) {
+
+                // 🔥 AQUI: EXTRAINDO A ROLE DO TOKEN
+                var claims = jwtUtil.getClaims(token);
+                String role = claims.get("role", String.class);
+
                 UsernamePasswordAuthenticationToken authToken =
-                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                null,
+                                java.util.List.of(new org.springframework.security.core.authority.SimpleGrantedAuthority("ROLE_" + role))
+                        );
+
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }

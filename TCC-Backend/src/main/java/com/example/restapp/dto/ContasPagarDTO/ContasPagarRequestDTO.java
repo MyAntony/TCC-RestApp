@@ -2,8 +2,11 @@ package com.example.restapp.dto.ContasPagarDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import jakarta.validation.constraints.*;
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter // Gera os getters
 @Setter // Gera os setters
@@ -12,24 +15,11 @@ import lombok.*;
 public class ContasPagarRequestDTO
 {
 
-    @NotNull(message = "A categoria é obrigatória.")
     private Long categoriaId;
-
-    @NotNull(message = "O fornecedor é obrigatório.")
     private Long fornecedorId;
-
-    @Size(max = 255, message = "A descrição deve ter no máximo 255 caracteres.")
     private String descricao;
-
-    @NotNull(message = "A data de vencimento é obrigatória.")
     private LocalDate dataVencimento;
-
-    @NotNull(message = "O valor é obrigatório.")
-    @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que zero.")
     private BigDecimal valor;
-
     private LocalDate dataPagamento;
-
-    @NotNull(message = "O status do pagamento é obrigatório.")
     private String statusPagamento;
 }

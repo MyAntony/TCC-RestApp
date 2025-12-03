@@ -1,6 +1,8 @@
 package com.example.restapp.service;
 
-import jakarta.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -9,8 +11,7 @@ import com.example.restapp.dto.FornecedorDTO.FornecedorResponseDTO;
 import com.example.restapp.model.financeiro.Fornecedor;
 import com.example.restapp.repository.FornecedorRepository;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import jakarta.validation.Valid;
 
 @Service
 @Validated
@@ -44,9 +45,7 @@ public class FornecedorService
     {
         return fornecedorRepository.findAll()
                 .stream()
-                .map(fornecedor -> new FornecedorResponseDTO(
-                        fornecedor.getNomeFantasia()
-                ))
+                .map(fornecedor -> new FornecedorResponseDTO(fornecedor.getId(), fornecedor.getNomeFantasia()))
                 .collect(Collectors.toList());
     }
 
@@ -55,7 +54,7 @@ public class FornecedorService
     {
         return fornecedorRepository.findByNomeFantasiaContainingIgnoreCase(nomeFantasia)
             .stream()
-            .map(fornecedor -> new FornecedorResponseDTO(fornecedor.getNomeFantasia()))
+            .map(fornecedor -> new FornecedorResponseDTO(fornecedor.getId(), fornecedor.getNomeFantasia()))
             .collect(Collectors.toList());
     }
 

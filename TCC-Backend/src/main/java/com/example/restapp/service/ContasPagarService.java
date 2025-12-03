@@ -39,6 +39,11 @@ public class ContasPagarService
         Fornecedor fornecedor = fornecedorRepository.findById(dto.getFornecedorId())
                 .orElseThrow(() -> new RuntimeException("Fornecedor não encontrado"));
 
+        if (dto.getStatusPagamento() == null)
+        {
+                dto.setStatusPagamento("PENDENTE");
+        }
+
         ContasPagar conta = new ContasPagar();
         conta.setCategoria(categoria);
         conta.setFornecedor(fornecedor);
