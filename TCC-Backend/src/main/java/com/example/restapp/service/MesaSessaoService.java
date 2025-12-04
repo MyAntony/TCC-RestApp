@@ -82,6 +82,15 @@ public class MesaSessaoService
         return toResponseDTO(mesaSessaoRepository.save(mesaSessao));
     }
 
+    public MesaSessaoResponseDTO buscarPorMesaId(Long numeroMesa)
+    {
+        MesaSessao mesaSessao = mesaSessaoRepository
+                .findByMesaIdAndStatus(numeroMesa, StatusMesa.OCUPADA)
+                .orElseThrow(() -> new RuntimeException("Nenhuma sessão OCUPADA encontrada para esta mesa."));
+
+        return toResponseDTO(mesaSessao);
+    }
+
     // Read
     public MesaSessaoResponseDTO obterPorId(Long id)
     {
@@ -252,14 +261,14 @@ public class MesaSessaoService
 
         Mesa mesa = mesaRepository.findById(MesaSessaoRequestDTO.getNumeroMesa()).orElseThrow(() -> new RuntimeException("Mesa não encontrada"));
 
-        List<StatusMesa> statusAbertos = Arrays.asList(StatusMesa.OCUPADA, StatusMesa.FECHAMENTO);
+        // List<StatusMesa> statusAbertos = Arrays.asList(StatusMesa.OCUPADA, StatusMesa.FECHAMENTO);
 
-        boolean existeSessaoAberta = mesaSessaoRepository.existsByMesaIdAndStatusIn(MesaSessaoRequestDTO.getNumeroMesa(), statusAbertos);
+        // boolean existeSessaoAberta = mesaSessaoRepository.existsByMesaIdAndStatusIn(MesaSessaoRequestDTO.getNumeroMesa(), statusAbertos);
 
-        if (existeSessaoAberta)
-        {
-            throw new RuntimeException("Já existe uma sessão ativa para esta mesa.");
-        }
+        // if (existeSessaoAberta)
+        // {
+        //     throw new RuntimeException("Já existe uma sessão ativa para esta mesa.");
+        // } 
         
         mesaExistente.setMesa(mesa);
         mesaExistente.setQuantidadePessoas(MesaSessaoRequestDTO.getQuantidadePessoas());
@@ -279,7 +288,7 @@ public class MesaSessaoService
     }
 
     // Método auxiliar para converter Mesa em MesaResponseDTO
-    private MesaSessaoResponseDTO toResponseDTO(MesaSessao mesaSessao)
+    public MesaSessaoResponseDTO toResponseDTO(MesaSessao mesaSessao)
     {
         List<PedidoResumoDTO> pedidosDTO = pedidoService.listarPedidosDaMesa(mesaSessao.getId());
         List<PagamentoResponseDTO> pagamentosDTO = pagamentoService.listarPagamentosPorMesa(mesaSessao.getId());

@@ -35,9 +35,7 @@ public class Produto
 
     private String descricao;
     
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] imagem;
+    private String imagem;
 
     private LocalDate dataCriacao;
 

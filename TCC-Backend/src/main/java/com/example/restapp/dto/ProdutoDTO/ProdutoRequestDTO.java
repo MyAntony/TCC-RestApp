@@ -15,5 +15,5 @@ public class ProdutoRequestDTO
     private BigDecimal precoCusto;
     private BigDecimal precoVenda;
     private String descricao;
-    private byte[] imagem;
+    private String imagem;
 }
