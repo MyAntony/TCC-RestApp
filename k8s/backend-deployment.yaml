@@ -24,10 +24,10 @@ spec:
         # ou apenas remover a linha de imagePullPolicy
 
         ports:
-        - containerPort: 8080
+        - containerPort: 8081
         env:
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://mysql:3306/restapp
+          value: jdbc:mysql://mysql:3307/restapp
         - name: SPRING_DATASOURCE_USERNAME
           value: user
         - name: SPRING_DATASOURCE_PASSWORD
@@ -40,8 +40,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - port: 8080
-      targetPort: 8080
-      nodePort: 30080
+    - port: 8081
+      targetPort: 8081
+      nodePort: 30081
   selector:
     app: backend

@@ -1,4 +1,4 @@
-package com.example.restapp.dto.FornecedorDTO;
+package com.example.restapp.dto.fornecedor;
 
 import com.example.restapp.model.Endereco;
 import com.example.restapp.model.TipoDocumento;

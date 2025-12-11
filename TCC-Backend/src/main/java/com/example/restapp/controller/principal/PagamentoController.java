@@ -3,7 +3,7 @@ package com.example.restapp.controller.principal;
 import java.util.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import com.example.restapp.dto.PagamentoDTO.*;
+import com.example.restapp.dto.pagamento.*;
 import com.example.restapp.service.*;
 import jakarta.validation.*;
 

@@ -1,4 +1,4 @@
-package com.example.restapp.dto.UsuarioDTO;
+package com.example.restapp.dto.usuario;
 
 import com.example.restapp.model.Cargo;
 

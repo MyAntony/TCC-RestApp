@@ -1,5 +1,19 @@
+TCC-Frontend
+
 TCC-Frontend/node_modules/
 
 .vscode
 
 target/
+
+scripts
+
+TCC-FRONT-END
+
+TCC-FRONT-END/node_modules/
+
+ELECTRON-SETUP-GUIDE.md
+
+hs_err_pid29444.log
+
+TCC-Backend/.idea/

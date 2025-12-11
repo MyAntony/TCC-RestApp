@@ -1,11 +1,11 @@
-package com.example.restapp.dto.MesaSessaoDTO;
+package com.example.restapp.dto.mesasessao;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.example.restapp.dto.PagamentoDTO.PagamentoResponseDTO;
-import com.example.restapp.dto.PedidoDTO.PedidoResumoDTO;
+import com.example.restapp.dto.pagamento.PagamentoResponseDTO;
+import com.example.restapp.dto.pedido.PedidoResumoDTO;
 import com.example.restapp.model.enums.StatusMesa;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

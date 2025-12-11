@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.restapp.dto.FornecedorDTO.FornecedorRequestDTO;
-import com.example.restapp.dto.FornecedorDTO.FornecedorResponseDTO;
+import com.example.restapp.dto.fornecedor.FornecedorRequestDTO;
+import com.example.restapp.dto.fornecedor.FornecedorResponseDTO;
 import com.example.restapp.service.FornecedorService;
 
 import java.util.*;

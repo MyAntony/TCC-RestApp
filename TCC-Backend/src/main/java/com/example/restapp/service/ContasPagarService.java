@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.restapp.dto.ContasPagarDTO.ContasPagarRequestDTO;
-import com.example.restapp.dto.ContasPagarDTO.ContasPagarResponseDTO;
+import com.example.restapp.dto.contaspagar.ContasPagarRequestDTO;
+import com.example.restapp.dto.contaspagar.ContasPagarResponseDTO;
 import com.example.restapp.model.financeiro.CategoriaContas;
 import com.example.restapp.model.financeiro.ContasPagar;
 import com.example.restapp.model.financeiro.Fornecedor;

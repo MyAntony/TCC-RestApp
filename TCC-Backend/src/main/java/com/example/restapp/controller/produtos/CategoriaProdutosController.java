@@ -1,7 +1,7 @@
 package com.example.restapp.controller.produtos;
 
-import com.example.restapp.dto.CategoriaProdutosDTO.CategoriaProdutosRequestDTO;
-import com.example.restapp.dto.CategoriaProdutosDTO.CategoriaProdutosResponseDTO;
+import com.example.restapp.dto.categoriaprodutos.CategoriaProdutosRequestDTO;
+import com.example.restapp.dto.categoriaprodutos.CategoriaProdutosResponseDTO;
 import com.example.restapp.service.CategoriaProdutosService;
 import java.util.*;
 import org.springframework.http.*;

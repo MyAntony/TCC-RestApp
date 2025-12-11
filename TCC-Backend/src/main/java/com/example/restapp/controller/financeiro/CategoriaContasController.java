@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.restapp.dto.CategoriaContasDTO.CategoriaContasRequestDTO;
-import com.example.restapp.dto.CategoriaContasDTO.CategoriaContasResponseDTO;
+import com.example.restapp.dto.categoriacontas.CategoriaContasRequestDTO;
+import com.example.restapp.dto.categoriacontas.CategoriaContasResponseDTO;
 import com.example.restapp.service.CategoriaContasService;
 
 import java.util.*;

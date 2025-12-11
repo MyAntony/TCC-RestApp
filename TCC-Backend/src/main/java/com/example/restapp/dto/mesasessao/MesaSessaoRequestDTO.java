@@ -1,4 +1,4 @@
-package com.example.restapp.dto.MesaSessaoDTO;
+package com.example.restapp.dto.mesasessao;
 
 import java.math.BigDecimal;
 

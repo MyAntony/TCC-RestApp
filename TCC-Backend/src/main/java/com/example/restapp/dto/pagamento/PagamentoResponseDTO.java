@@ -1,4 +1,4 @@
-package com.example.restapp.dto.PagamentoDTO;
+package com.example.restapp.dto.pagamento;
 
 import lombok.*;
 import java.math.BigDecimal;

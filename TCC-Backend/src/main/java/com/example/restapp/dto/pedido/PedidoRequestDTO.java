@@ -1,4 +1,4 @@
-package com.example.restapp.dto.PedidoDTO;
+package com.example.restapp.dto.pedido;
 
 import lombok.*;
 

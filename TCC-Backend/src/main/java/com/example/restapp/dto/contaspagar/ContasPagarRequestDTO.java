@@ -1,4 +1,4 @@
-package com.example.restapp.dto.ContasPagarDTO;
+package com.example.restapp.dto.contaspagar;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,7 +1,7 @@
 package com.example.restapp.controller.produtos;
 
-import com.example.restapp.dto.ProdutoDTO.ProdutoRequestDTO;
-import com.example.restapp.dto.ProdutoDTO.ProdutoResponseDTO;
+import com.example.restapp.dto.produto.ProdutoRequestDTO;
+import com.example.restapp.dto.produto.ProdutoResponseDTO;
 import com.example.restapp.service.ProdutoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

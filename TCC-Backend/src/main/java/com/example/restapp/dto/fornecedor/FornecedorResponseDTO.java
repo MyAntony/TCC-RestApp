@@ -1,4 +1,4 @@
-package com.example.restapp.dto.CategoriaContasDTO;
+package com.example.restapp.dto.fornecedor;
 
 import lombok.*;
 
@@ -6,9 +6,8 @@ import lombok.*;
 @Setter // Gera os setters
 @AllArgsConstructor // Gera o construtor com todos os argumentos
 @NoArgsConstructor // Gera o construtor sem argumentos
-public class CategoriaContasResponseDTO
+public class FornecedorResponseDTO
 {
     private Long id;
-    private String nomeCategoria;
-    private String descricaoCategoria;
+    private String nomeFantasia;
 }

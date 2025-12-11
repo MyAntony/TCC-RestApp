@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.example.restapp.dto.PedidoDTO.*;
+import com.example.restapp.dto.pedido.*;
 import com.example.restapp.model.principal.*;
 import com.example.restapp.model.produtos.Produto;
 import com.example.restapp.repository.*;
@@ -65,13 +65,16 @@ public class PedidoService
     // Read por Mesa
     public List<PedidoResumoDTO> listarPedidosDaMesa(Long idMesaSessao)
     {
-        return pedidoRepository.findByMesaSessaoId(idMesaSessao).stream().map(pedido -> new PedidoResumoDTO
-        (
-            pedido.getProduto().getNomeProduto(),
-            pedido.getQuantidadeProduto(),
-            pedido.getValorUnitario(),
-            pedido.getValorTotal()
-        )).toList();
+        return pedidoRepository.findByMesaSessaoId(idMesaSessao)
+            .stream()
+            .map(pedido -> new PedidoResumoDTO(
+                pedido.getId(),
+                pedido.getProduto().getNomeProduto(),
+                pedido.getQuantidadeProduto(),
+                pedido.getValorUnitario(),
+                pedido.getValorTotal()
+            ))
+            .toList();
     }
 
     // Read All

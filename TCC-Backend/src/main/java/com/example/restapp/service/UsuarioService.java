@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.restapp.dto.UsuarioDTO.UsuarioRequestDTO;
-import com.example.restapp.dto.UsuarioDTO.UsuarioResponseDTO;
+import com.example.restapp.dto.usuario.UsuarioRequestDTO;
+import com.example.restapp.dto.usuario.UsuarioResponseDTO;
 import com.example.restapp.model.Usuario;
 import com.example.restapp.repository.UsuarioRepository;
 

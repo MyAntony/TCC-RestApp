@@ -1,4 +1,4 @@
-package com.example.restapp.dto.ProdutoDTO;
+package com.example.restapp.dto.produto;
 
 import java.math.BigDecimal;
 

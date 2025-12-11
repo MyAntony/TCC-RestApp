@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.example.restapp.dto.FornecedorDTO.FornecedorRequestDTO;
-import com.example.restapp.dto.FornecedorDTO.FornecedorResponseDTO;
+import com.example.restapp.dto.fornecedor.FornecedorRequestDTO;
+import com.example.restapp.dto.fornecedor.FornecedorResponseDTO;
 import com.example.restapp.model.financeiro.Fornecedor;
 import com.example.restapp.repository.FornecedorRepository;
 

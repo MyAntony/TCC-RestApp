@@ -9,10 +9,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.restapp.dto.MesaSessaoDTO.MesaSessaoRequestDTO;
-import com.example.restapp.dto.MesaSessaoDTO.MesaSessaoResponseDTO;
-import com.example.restapp.dto.PagamentoDTO.PagamentoResponseDTO;
-import com.example.restapp.dto.PedidoDTO.PedidoResumoDTO;
+import com.example.restapp.dto.mesasessao.MesaSessaoRequestDTO;
+import com.example.restapp.dto.mesasessao.MesaSessaoResponseDTO;
+import com.example.restapp.dto.pagamento.PagamentoResponseDTO;
+import com.example.restapp.dto.pedido.PedidoResumoDTO;
 import com.example.restapp.model.Usuario;
 import com.example.restapp.model.enums.StatusMesa;
 import com.example.restapp.model.principal.Cliente;

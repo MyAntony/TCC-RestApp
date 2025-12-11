@@ -1,16 +1,13 @@
-package com.example.restapp.dto.CategoriaProdutosDTO;
+package com.example.restapp.dto.categoriaprodutos;
 
-import java.time.*;
 import lombok.*;
 
 @Getter // Gera os getters
+@Setter // Gera os setters
 @AllArgsConstructor // Gera o construtor com todos os argumentos
 @NoArgsConstructor // Gera o construtor sem argumentos
-public class CategoriaProdutosResponseDTO
+public class CategoriaProdutosRequestDTO
 {
-    private Long id;
     private String nomeCategoriaProdutos;
     private String descricaoCategoriaProdutos;
-    private LocalDate dataCriacao;
-    
 }

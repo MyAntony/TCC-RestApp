@@ -1,6 +1,6 @@
 # Etapa 1: Build
 FROM ubuntu:latest AS build
-RUN apt-get update && apt-get install -y openjdk-17-jdk maven
+RUN apt-get update && apt-get install -y openjdk-21-jdk maven
 
 # Define um diretório de trabalho consistente
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY . .
 RUN mvn clean install -DskipTests
 
 # Etapa 2: Execução
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:21-jre
 
 EXPOSE 8080
 

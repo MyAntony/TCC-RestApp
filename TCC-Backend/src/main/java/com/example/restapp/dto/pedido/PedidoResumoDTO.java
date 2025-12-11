@@ -1,4 +1,4 @@
-package com.example.restapp.dto.PedidoDTO;
+package com.example.restapp.dto.pedido;
 
 import java.math.BigDecimal;
 
@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor // Gera o construtor com todos os argumentos
 public class PedidoResumoDTO
 {
+    private Long id;
     private String nomeProduto;
     private Integer quantidade;
     private BigDecimal valorUnitario;

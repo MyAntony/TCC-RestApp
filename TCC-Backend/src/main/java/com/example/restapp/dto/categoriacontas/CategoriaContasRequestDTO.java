@@ -1,4 +1,4 @@
-package com.example.restapp.dto.CategoriaContasDTO;
+package com.example.restapp.dto.categoriacontas;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
