@@ -17,3 +17,7 @@ ELECTRON-SETUP-GUIDE.md
 hs_err_pid29444.log
 
 TCC-Backend/.idea/
+
+.mvn
+
+.idea
