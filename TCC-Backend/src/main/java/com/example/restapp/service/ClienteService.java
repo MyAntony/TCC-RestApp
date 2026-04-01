@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.example.restapp.model.principal.Cliente;
+import com.example.restapp.entity.principal.Cliente;
 import com.example.restapp.repository.ClienteRepository;
 
 import java.util.List;

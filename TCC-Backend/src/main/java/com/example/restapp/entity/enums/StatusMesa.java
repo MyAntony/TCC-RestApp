@@ -1,4 +1,4 @@
-package com.example.restapp.model.enums;
+package com.example.restapp.entity.enums;
 
 public enum StatusMesa
 {

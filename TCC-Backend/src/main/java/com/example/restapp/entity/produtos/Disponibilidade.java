@@ -1,4 +1,4 @@
-package com.example.restapp.model.produtos;
+package com.example.restapp.entity.produtos;
 
 public enum Disponibilidade {
 

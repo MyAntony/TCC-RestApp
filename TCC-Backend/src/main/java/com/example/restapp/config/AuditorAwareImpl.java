@@ -6,7 +6,8 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import com.example.restapp.model.Usuario;
+
+import com.example.restapp.entity.Usuario;
 import com.example.restapp.repository.UsuarioRepository;
 
 @Component

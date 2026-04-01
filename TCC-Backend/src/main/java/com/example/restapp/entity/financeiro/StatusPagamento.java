@@ -1,4 +1,4 @@
-package com.example.restapp.model.financeiro;
+package com.example.restapp.entity.financeiro;
 
 public enum StatusPagamento
 {

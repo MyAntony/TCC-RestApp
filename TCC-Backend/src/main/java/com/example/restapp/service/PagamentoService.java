@@ -1,9 +1,9 @@
 package com.example.restapp.service;
 
-import com.example.restapp.model.principal.MesaSessao;
-import com.example.restapp.model.principal.Pagamento;
-import com.example.restapp.model.financeiro.MetodoPagamento;
 import com.example.restapp.dto.pagamento.*;
+import com.example.restapp.entity.financeiro.MetodoPagamento;
+import com.example.restapp.entity.principal.MesaSessao;
+import com.example.restapp.entity.principal.Pagamento;
 import com.example.restapp.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

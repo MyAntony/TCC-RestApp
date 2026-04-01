@@ -4,7 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.example.restapp.model.financeiro.MetodoPagamento;
+import com.example.restapp.entity.financeiro.MetodoPagamento;
 import com.example.restapp.repository.MetodoPagamentoRepository;
 
 import java.util.List;

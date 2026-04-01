@@ -2,8 +2,8 @@ package com.example.restapp.service;
 
 import com.example.restapp.dto.produto.ProdutoRequestDTO;
 import com.example.restapp.dto.produto.ProdutoResponseDTO;
-import com.example.restapp.model.produtos.CategoriaProdutos;
-import com.example.restapp.model.produtos.Produto;
+import com.example.restapp.entity.produtos.CategoriaProdutos;
+import com.example.restapp.entity.produtos.Produto;
 import com.example.restapp.repository.CategoriaProdutosRepository;
 import com.example.restapp.repository.ProdutoRepository;
 import jakarta.validation.Valid;

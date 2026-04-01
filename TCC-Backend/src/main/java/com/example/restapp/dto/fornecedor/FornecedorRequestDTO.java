@@ -1,7 +1,7 @@
 package com.example.restapp.dto.fornecedor;
 
-import com.example.restapp.model.Endereco;
-import com.example.restapp.model.TipoDocumento;
+import com.example.restapp.entity.Endereco;
+import com.example.restapp.entity.TipoDocumento;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

@@ -1,6 +1,6 @@
 package com.example.restapp.dto.usuario;
 
-import com.example.restapp.model.Cargo;
+import com.example.restapp.entity.Cargo;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

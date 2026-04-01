@@ -1,4 +1,4 @@
-package com.example.restapp.model.financeiro;
+package com.example.restapp.entity.financeiro;
 
 import java.math.BigDecimal;
 

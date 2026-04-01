@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
-import com.example.restapp.model.Usuario;
+import com.example.restapp.entity.Usuario;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

@@ -1,6 +1,6 @@
 package com.example.restapp.dto.usuario;
 
-import com.example.restapp.model.Cargo;
+import com.example.restapp.entity.Cargo;
 
 import lombok.*;
 
@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor // Gera o construtor sem argumentos
 public class UsuarioResponseDTO
 {
+    private Long id;
     private String nome;
     private String email;
     private Cargo cargo;

@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 
 import com.example.restapp.dto.fornecedor.FornecedorRequestDTO;
 import com.example.restapp.dto.fornecedor.FornecedorResponseDTO;
-import com.example.restapp.model.financeiro.Fornecedor;
+import com.example.restapp.entity.financeiro.Fornecedor;
 import com.example.restapp.repository.FornecedorRepository;
 
 import jakarta.validation.Valid;

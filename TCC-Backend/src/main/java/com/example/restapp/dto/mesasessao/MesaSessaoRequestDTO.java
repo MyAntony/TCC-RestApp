@@ -2,7 +2,8 @@ package com.example.restapp.dto.mesasessao;
 
 import java.math.BigDecimal;
 
-import com.example.restapp.model.enums.StatusMesa;
+import com.example.restapp.entity.enums.StatusMesa;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

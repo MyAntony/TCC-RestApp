@@ -1,4 +1,4 @@
-package com.example.restapp.model.produtos;
+package com.example.restapp.entity.produtos;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

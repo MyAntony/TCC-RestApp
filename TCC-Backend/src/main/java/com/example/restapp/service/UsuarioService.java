@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.restapp.dto.usuario.UsuarioRequestDTO;
 import com.example.restapp.dto.usuario.UsuarioResponseDTO;
-import com.example.restapp.model.Usuario;
+import com.example.restapp.entity.Usuario;
 import com.example.restapp.repository.UsuarioRepository;
 
 @Service
@@ -46,7 +46,7 @@ public List<UsuarioResponseDTO> listarUsuarios()
 
 private UsuarioResponseDTO toDTO(Usuario usuario)
 {
-    return new UsuarioResponseDTO(usuario.getNome(), usuario.getEmail(), usuario.getCargo());
+    return new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getCargo());
 }
 
 }

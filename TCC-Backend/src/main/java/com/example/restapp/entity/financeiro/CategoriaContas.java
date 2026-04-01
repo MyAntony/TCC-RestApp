@@ -1,4 +1,4 @@
-package com.example.restapp.model.financeiro;
+package com.example.restapp.entity.financeiro;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

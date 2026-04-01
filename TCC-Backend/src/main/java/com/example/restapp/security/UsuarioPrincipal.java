@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.example.restapp.model.Usuario;
+import com.example.restapp.entity.Usuario;
 
 import lombok.Getter;
 public class UsuarioPrincipal implements UserDetails
