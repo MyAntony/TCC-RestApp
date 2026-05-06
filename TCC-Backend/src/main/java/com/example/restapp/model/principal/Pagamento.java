@@ -1,4 +1,4 @@
-package com.example.restapp.entity.principal;
+package com.example.restapp.model.principal;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,8 +6,8 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.example.restapp.entity.Usuario;
-import com.example.restapp.entity.financeiro.MetodoPagamento;
+import com.example.restapp.model.Usuario;
+import com.example.restapp.model.financeiro.MetodoPagamento;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package com.example.restapp.entity;
+package com.example.restapp.model;
 
 public enum Cargo
 {

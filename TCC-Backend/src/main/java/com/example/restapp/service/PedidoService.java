@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.example.restapp.dto.pedido.*;
-import com.example.restapp.entity.principal.*;
-import com.example.restapp.entity.produtos.Produto;
+import com.example.restapp.model.principal.*;
+import com.example.restapp.model.produtos.Produto;
 import com.example.restapp.repository.*;
 
 import jakarta.validation.Valid;

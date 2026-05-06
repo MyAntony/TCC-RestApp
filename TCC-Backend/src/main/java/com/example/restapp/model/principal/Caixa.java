@@ -1,9 +1,9 @@
-// package com.example.restapp.entity.principal;
+// package com.example.restapp.model.principal;
 
 // import jakarta.persistence.Entity;
 // import org.springframework.data.annotation.CreatedBy;
 
-// import com.example.restapp.entity.Usuario;
+// import com.example.restapp.model.Usuario;
 
 // import jakarta.persistence.GeneratedValue;
 // import jakarta.persistence.GenerationType;

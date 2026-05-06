@@ -1,4 +1,4 @@
-package com.example.restapp.entity.principal;
+package com.example.restapp.model.principal;
 
 import jakarta.persistence.*;
 import lombok.*;

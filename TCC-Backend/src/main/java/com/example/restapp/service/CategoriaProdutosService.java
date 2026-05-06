@@ -2,7 +2,7 @@ package com.example.restapp.service;
 
 import com.example.restapp.dto.categoriaprodutos.CategoriaProdutosRequestDTO;
 import com.example.restapp.dto.categoriaprodutos.CategoriaProdutosResponseDTO;
-import com.example.restapp.entity.produtos.CategoriaProdutos;
+import com.example.restapp.model.produtos.CategoriaProdutos;
 import com.example.restapp.repository.CategoriaProdutosRepository;
 import java.util.List;
 import java.util.stream.Collectors;

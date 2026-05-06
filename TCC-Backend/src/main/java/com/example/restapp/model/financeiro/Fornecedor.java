@@ -1,7 +1,7 @@
-package com.example.restapp.entity.financeiro;
+package com.example.restapp.model.financeiro;
 
-import com.example.restapp.entity.Endereco;
-import com.example.restapp.entity.TipoDocumento;
+import com.example.restapp.model.Endereco;
+import com.example.restapp.model.TipoDocumento;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;

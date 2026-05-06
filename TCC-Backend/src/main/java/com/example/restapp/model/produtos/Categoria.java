@@ -1,4 +1,4 @@
-package com.example.restapp.entity.produtos;
+package com.example.restapp.model.produtos;
 
 public enum Categoria
 {
