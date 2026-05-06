@@ -31,7 +31,6 @@ public class ContasPagar
     @Column(nullable = false)
     private LocalDate dataVencimento;
 
-    @NotNull(message = "O valor é obrigatório.")
     @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que zero.")
     private BigDecimal valor;
 
