@@ -1,4 +1,4 @@
-package com.example.restapp.entity.financeiro;
+package com.example.restapp.model.financeiro;
 
 public enum BandeiraCartao
 {

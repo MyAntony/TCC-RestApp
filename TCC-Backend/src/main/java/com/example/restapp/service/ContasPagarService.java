@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.restapp.dto.contaspagar.ContasPagarRequestDTO;
 import com.example.restapp.dto.contaspagar.ContasPagarResponseDTO;
-import com.example.restapp.entity.financeiro.CategoriaContas;
-import com.example.restapp.entity.financeiro.ContasPagar;
-import com.example.restapp.entity.financeiro.Fornecedor;
-import com.example.restapp.entity.financeiro.StatusPagamento;
+import com.example.restapp.model.financeiro.CategoriaContas;
+import com.example.restapp.model.financeiro.ContasPagar;
+import com.example.restapp.model.financeiro.Fornecedor;
+import com.example.restapp.model.financeiro.StatusPagamento;
 import com.example.restapp.repository.CategoriaContasRepository;
 import com.example.restapp.repository.ContasPagarRepository;
 import com.example.restapp.repository.FornecedorRepository;

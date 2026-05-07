@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.restapp.dto.usuario.UsuarioRequestDTO;
 import com.example.restapp.dto.usuario.UsuarioResponseDTO;
-import com.example.restapp.entity.Usuario;
+import com.example.restapp.model.Usuario;
 import com.example.restapp.repository.UsuarioRepository;
 
 @Service

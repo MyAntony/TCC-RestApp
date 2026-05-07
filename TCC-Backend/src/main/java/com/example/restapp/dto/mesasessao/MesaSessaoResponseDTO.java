@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.example.restapp.dto.pagamento.PagamentoResponseDTO;
 import com.example.restapp.dto.pedido.PedidoResumoDTO;
-import com.example.restapp.entity.enums.StatusMesa;
+import com.example.restapp.model.enums.StatusMesa;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 

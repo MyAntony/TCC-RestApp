@@ -1,6 +1,6 @@
-package com.example.restapp.entity.principal;
+package com.example.restapp.model.principal;
 
-import com.example.restapp.entity.Endereco;
+import com.example.restapp.model.Endereco;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
