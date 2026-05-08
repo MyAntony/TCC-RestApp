@@ -1,8 +1,14 @@
 package com.example.restapp.model.financeiro;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity // Indica que esta classe é uma entidade JPA
 @Getter // Gera os getters
@@ -15,7 +21,7 @@ public class CategoriaContas
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome da categoria é obrigatório.")
+    @JoinColumn(nullable = false)
     private String nomeCategoria;
 
     private String descricaoCategoria;

@@ -1,14 +1,26 @@
 package com.example.restapp.controller.financeiro;
 
-import jakarta.validation.Valid;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.restapp.dto.fornecedor.FornecedorRequestDTO;
 import com.example.restapp.dto.fornecedor.FornecedorResponseDTO;
 import com.example.restapp.service.FornecedorService;
 
-import java.util.*;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -43,10 +55,10 @@ public class FornecedorController
         return fornecedorService.buscarPorNome(nomeFantasia);
     }
 
-    @PutMapping // Update crUd
-    public ResponseEntity<Map<String, Object>> atualizar(@Valid @RequestBody FornecedorRequestDTO fornecedorRequestDTO)
+    @PutMapping("/{id}") // Update crUd
+    public ResponseEntity<Map<String, Object>> atualizar(@PathVariable Long id, @Valid @RequestBody FornecedorRequestDTO fornecedorRequestDTO)
     {
-        fornecedorService.atualizar(fornecedorRequestDTO);
+        fornecedorService.atualizar(id, fornecedorRequestDTO);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(Map.of("mensagem", "Fornecedor atualizado com sucesso"));

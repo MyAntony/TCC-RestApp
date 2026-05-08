@@ -1,23 +1,23 @@
 package com.example.restapp.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.example.restapp.dto.categoriaprodutos.CategoriaProdutosRequestDTO;
 import com.example.restapp.dto.categoriaprodutos.CategoriaProdutosResponseDTO;
 import com.example.restapp.model.produtos.CategoriaProdutos;
 import com.example.restapp.repository.CategoriaProdutosRepository;
-import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.stereotype.Service;
+
 import jakarta.validation.Valid;
 
 @Service 
 public class CategoriaProdutosService
 {
+    @Autowired
     private CategoriaProdutosRepository categoriaProdutosRepository;
-
-    public CategoriaProdutosService(CategoriaProdutosRepository categoriaProdutosRepository)
-    {
-        this.categoriaProdutosRepository = categoriaProdutosRepository;
-    }
 
     // Create
     public CategoriaProdutosResponseDTO salvar(@Valid CategoriaProdutosRequestDTO categoriaProdutosRequestDTO)

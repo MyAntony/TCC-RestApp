@@ -37,18 +37,18 @@ public class Pedido
 
     @CreatedBy
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", nullable = false, updatable = false)
+    @JoinColumn(nullable = false, updatable = false)
     private Usuario usuario;
     
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mesa_sessao_id", nullable = false)
+    @JoinColumn(nullable = false)
     private MesaSessao mesaSessao;
 
     private String descricaoPedido;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "produto_id", nullable = false)
+    @JoinColumn(nullable = false)
     private Produto produto;
 
     private Integer quantidadeProduto = 1;

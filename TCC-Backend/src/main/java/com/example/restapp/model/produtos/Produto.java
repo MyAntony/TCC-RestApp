@@ -3,9 +3,20 @@ package com.example.restapp.model.produtos;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter // Gera os getters
@@ -19,24 +30,24 @@ public class Produto
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome do produto é obrigatorio.")
+    @JoinColumn(nullable = false)
     private String nomeProduto;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoria_id", nullable = false)
+    @JoinColumn(nullable = false)
     private CategoriaProdutos categoriaProdutos;
 
-    @NotNull(message = "O preço de custo do produto é obrigatório.")
-    @Min(value = 0, message = "O preço de custo não pode ser negativo.")
+    @JoinColumn(nullable = false)
     private BigDecimal precoCusto;
 
-    @NotNull(message = "O preço de venda do produto é obrigatório.")
+    @JoinColumn(nullable = false)
     private BigDecimal precoVenda;
 
     private String descricao;
-    
+
     private String imagem;
 
+    @CreatedDate
     private LocalDate dataCriacao;
 
     @PrePersist

@@ -3,17 +3,28 @@ package com.example.restapp.model.financeiro;
 import com.example.restapp.model.Endereco;
 import com.example.restapp.model.TipoDocumento;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter // Gera os getters
 @Setter // Gera os setters
 @AllArgsConstructor // Gera o construtor com todos os argumentos
 @NoArgsConstructor // Gera o construtor sem argumentos
-
-@Table(name = "fornecedor", uniqueConstraints = @UniqueConstraint(columnNames = "cnpj"))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "cnpj"))
 public class Fornecedor
 {
     @Id
@@ -22,10 +33,10 @@ public class Fornecedor
     
     private String nomeFantasia;
 
+    @Column(nullable = false)
     private String razaoSocial;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private TipoDocumento tipoDocumento;
 
     // @Size(min = 11, max = 11, message = "CPF deve conter 11 dígitos.")

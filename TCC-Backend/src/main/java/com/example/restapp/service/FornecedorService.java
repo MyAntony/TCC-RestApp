@@ -59,9 +59,9 @@ public class FornecedorService
     }
 
     // Update
-    public Fornecedor atualizar(@Valid FornecedorRequestDTO fornecedorRequestDTO)
+    public Fornecedor atualizar(Long id, @Valid FornecedorRequestDTO fornecedorRequestDTO)
     {
-        Fornecedor fornecedorAtualizar = fornecedorRepository.findById(fornecedorRequestDTO.getId())
+        Fornecedor fornecedorAtualizar = fornecedorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Fornecedor não encontrado."));
 
         fornecedorAtualizar.setNomeFantasia(fornecedorRequestDTO.getNomeFantasia());

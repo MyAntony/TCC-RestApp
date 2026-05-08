@@ -39,7 +39,7 @@ public class MesaSessao
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "atendente_abertura_id", nullable = false, updatable = false)
+    @JoinColumn(nullable = false, updatable = false)
     @ManyToOne
     @CreatedBy
     private Usuario atendenteAbertura;
@@ -49,7 +49,6 @@ public class MesaSessao
     private LocalDateTime horarioAbertura;
 
     @ManyToOne
-    @JoinColumn(name = "atendente_responsavel_id")
     private Usuario atendenteResponsavel;
 
     @ManyToOne
@@ -59,7 +58,6 @@ public class MesaSessao
     private Integer quantidadePessoas;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
     
     @Enumerated(EnumType.STRING)

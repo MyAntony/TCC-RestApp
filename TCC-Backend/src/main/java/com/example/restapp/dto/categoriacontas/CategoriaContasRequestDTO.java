@@ -1,7 +1,10 @@
 package com.example.restapp.dto.categoriacontas;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter // Gera os getters
 @Setter // Gera os setters

@@ -2,9 +2,20 @@ package com.example.restapp.model.financeiro;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity // Indica que esta classe é uma entidade JPA
 @Getter // Gera os getters
@@ -25,14 +36,13 @@ public class ContasPagar
     @JoinColumn(name = "fornecedor_id", nullable = false)
     private Fornecedor fornecedor;
 
-    @Size(max = 255, message = "A descrição deve ter no máximo 255 caracteres.")
+    @Column(nullable = false)
     private String descricao;
 
     @Column(nullable = false)
     private LocalDate dataVencimento;
 
-    @NotNull(message = "O valor é obrigatório.")
-    @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que zero.")
+    @Column(nullable = false)
     private BigDecimal valor;
 
     private LocalDate dataPagamento;

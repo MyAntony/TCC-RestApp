@@ -1,7 +1,8 @@
 package com.example.restapp.model.principal;
 
-import jakarta.persistence.*;
-import lombok.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -9,8 +10,18 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.example.restapp.model.Usuario;
 import com.example.restapp.model.financeiro.MetodoPagamento;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "pagamento")
@@ -28,19 +39,21 @@ public class Pagamento
 
     @CreatedBy
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(nullable = false, updatable = false)
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "mesa_sessao_id", nullable = false)
+    @JoinColumn(nullable = false, updatable = false)
     private MesaSessao mesaSessao;
 
+    @JoinColumn(nullable = false, updatable = false)
     private BigDecimal valorPagamento;
 
     @ManyToOne
-    @JoinColumn(name = "metodo_pagamento_id", nullable = false)
+    @JoinColumn(nullable = false, updatable = false)
     private MetodoPagamento metodoPagamento;
 
     @CreatedDate
+    @JoinColumn(nullable = false, updatable = false)
     private LocalDateTime horarioLancamento;
 }

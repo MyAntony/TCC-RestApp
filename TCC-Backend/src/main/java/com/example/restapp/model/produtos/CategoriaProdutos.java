@@ -1,10 +1,19 @@
 package com.example.restapp.model.produtos;
 
-import java.time.*;
-import java.util.*;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.*;
+import java.time.LocalDate;
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter 
@@ -17,7 +26,7 @@ public class CategoriaProdutos
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome da categoria do produto é obrigatório.")
+    @JoinColumn(unique = true, nullable = false)
     private String nomeCategoriaProdutos;
 
     private String descricaoCategoriaProdutos;
