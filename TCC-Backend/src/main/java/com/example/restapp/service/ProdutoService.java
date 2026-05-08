@@ -17,16 +17,11 @@ import java.util.stream.Collectors;
 @Validated
 public class ProdutoService
 {
+    @Autowired
     private ProdutoRepository produtoRepository;
 
     @Autowired
     private CategoriaProdutosRepository categoriaProdutosRepository;
-
-
-    public ProdutoService(ProdutoRepository produtoRepository)
-    {
-        this.produtoRepository = produtoRepository;
-    }
 
     // Create
     public ProdutoResponseDTO salvar(@Valid ProdutoRequestDTO produtoRequestDTO)

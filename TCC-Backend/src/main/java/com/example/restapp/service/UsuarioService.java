@@ -10,6 +10,8 @@ import com.example.restapp.dto.usuario.UsuarioResponseDTO;
 import com.example.restapp.model.Usuario;
 import com.example.restapp.repository.UsuarioRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class UsuarioService
 {
@@ -22,7 +24,7 @@ public class UsuarioService
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public Usuario salvarUsuario(UsuarioRequestDTO dto)
+    public Usuario salvarUsuario(@Valid UsuarioRequestDTO dto)
     {
         usuarioRepository.findByEmail(dto.getEmail())
             .ifPresent(u -> { throw new IllegalArgumentException("E-mail já cadastrado!"); });

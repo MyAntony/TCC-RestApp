@@ -7,10 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.example.restapp.dto.pedido.*;
-import com.example.restapp.model.principal.*;
+import com.example.restapp.dto.pedido.PedidoRequestDTO;
+import com.example.restapp.dto.pedido.PedidoResponseDTO;
+import com.example.restapp.dto.pedido.PedidoResumoDTO;
+import com.example.restapp.model.principal.MesaSessao;
+import com.example.restapp.model.principal.Pedido;
 import com.example.restapp.model.produtos.Produto;
-import com.example.restapp.repository.*;
+import com.example.restapp.repository.MesaSessaoRepository;
+import com.example.restapp.repository.PedidoRepository;
+import com.example.restapp.repository.ProdutoRepository;
 
 import jakarta.validation.Valid;
 
@@ -87,7 +92,7 @@ public class PedidoService
     }
 
     // Update
-    public PedidoResponseDTO atualizar(Long idMesaSessao, @Valid PedidoRequestDTO pedidoRequestDTO, Long id)
+    public PedidoResponseDTO atualizar(Long idMesaSessao, Long id, @Valid PedidoRequestDTO pedidoRequestDTO)
     {
         Pedido pedidoAtualizar = pedidoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));

@@ -1,13 +1,20 @@
 package com.example.restapp.service;
 
-import com.example.restapp.dto.pagamento.*;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.restapp.dto.pagamento.PagamentoRequestDTO;
+import com.example.restapp.dto.pagamento.PagamentoResponseDTO;
 import com.example.restapp.model.financeiro.MetodoPagamento;
 import com.example.restapp.model.principal.MesaSessao;
 import com.example.restapp.model.principal.Pagamento;
-import com.example.restapp.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.*;
+import com.example.restapp.repository.MesaSessaoRepository;
+import com.example.restapp.repository.MetodoPagamentoRepository;
+import com.example.restapp.repository.PagamentoRepository;
+
+import jakarta.validation.Valid;
 
 @Service
 public class PagamentoService
@@ -22,7 +29,7 @@ public class PagamentoService
     private MetodoPagamentoRepository metodoPagamentoRepository;
 
     // Create
-    public PagamentoResponseDTO salvarPagamento(Long idMesaSessao, PagamentoRequestDTO pagamentoRequestDTO)
+    public PagamentoResponseDTO salvarPagamento(Long idMesaSessao, @Valid PagamentoRequestDTO pagamentoRequestDTO)
     {
         MesaSessao mesaSessao = mesaSessaoRepository.findById(idMesaSessao)
             .orElseThrow(() -> new RuntimeException("MesaSessao não encontrada"));
@@ -61,7 +68,7 @@ public class PagamentoService
     }
 
     // Update
-    public PagamentoResponseDTO atualizarPagamento(Long idMesaSessao, Long id, PagamentoRequestDTO pagamentoRequestDTO)
+    public PagamentoResponseDTO atualizarPagamento(Long idMesaSessao, Long id, @Valid PagamentoRequestDTO pagamentoRequestDTO)
     {
         Pagamento pagamentoExistente = pagamentoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pagamento não encontrado com ID: " + id));

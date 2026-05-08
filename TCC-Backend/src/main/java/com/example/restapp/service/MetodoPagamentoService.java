@@ -1,6 +1,8 @@
 package com.example.restapp.service;
 
 import jakarta.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -13,12 +15,8 @@ import java.util.List;
 @Validated
 public class MetodoPagamentoService
 {
+    @Autowired
     private MetodoPagamentoRepository metodoPagamentoRepository;
-
-    public MetodoPagamentoService(MetodoPagamentoRepository metodoPagamentoRepository)
-    {
-        this.metodoPagamentoRepository = metodoPagamentoRepository;
-    }
 
     public List<MetodoPagamento> listarTodos()
     {

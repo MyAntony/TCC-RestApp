@@ -1,24 +1,22 @@
 package com.example.restapp.service;
 
-import jakarta.validation.Valid;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.example.restapp.model.principal.Cliente;
 import com.example.restapp.repository.ClienteRepository;
 
-import java.util.List;
+import jakarta.validation.Valid;
 
 @Service
 @Validated
 public class ClienteService
 {
+    @Autowired
     private ClienteRepository clienteRepository;
-
-    public ClienteService(ClienteRepository clienteRepository)
-    {
-        this.clienteRepository = clienteRepository;
-    }
 
     public List<Cliente> listarTodos()
     {

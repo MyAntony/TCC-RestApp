@@ -3,6 +3,7 @@ package com.example.restapp.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -17,12 +18,8 @@ import jakarta.validation.Valid;
 @Validated
 public class FornecedorService
 {
+    @Autowired
     private FornecedorRepository fornecedorRepository;
-
-    public FornecedorService(FornecedorRepository fornecedorRepository)
-    {
-        this.fornecedorRepository = fornecedorRepository;
-    }
 
     // Create
     public Fornecedor salvar(@Valid FornecedorRequestDTO fornecedorRequestDTO)

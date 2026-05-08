@@ -23,6 +23,8 @@ import com.example.restapp.repository.MesaRepository;
 import com.example.restapp.repository.MesaSessaoRepository;
 import com.example.restapp.repository.UsuarioRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class MesaSessaoService
 {
@@ -46,7 +48,7 @@ public class MesaSessaoService
     private PagamentoService pagamentoService;
 
     // Create
-    public MesaSessaoResponseDTO salvar(MesaSessaoRequestDTO MesaSessaoRequestDTO)
+    public MesaSessaoResponseDTO salvar(@Valid MesaSessaoRequestDTO MesaSessaoRequestDTO)
     {
         Usuario atendenteResponsavel = null;
         if (MesaSessaoRequestDTO.getIdAtendenteResponsavel() != null)
@@ -131,7 +133,7 @@ public class MesaSessaoService
     }
 
     // Update
-    public MesaSessaoResponseDTO atualizar(Long id, MesaSessaoRequestDTO MesaSessaoRequestDTO)
+    public MesaSessaoResponseDTO atualizar(Long id, @Valid MesaSessaoRequestDTO MesaSessaoRequestDTO)
     {
         MesaSessao mesaExistente = mesaSessaoRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Mesa não encontrada"));

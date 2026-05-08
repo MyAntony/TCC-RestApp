@@ -2,22 +2,22 @@ package com.example.restapp.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.example.restapp.dto.categoriacontas.CategoriaContasRequestDTO;
 import com.example.restapp.dto.categoriacontas.CategoriaContasResponseDTO;
 import com.example.restapp.model.financeiro.CategoriaContas;
 import com.example.restapp.repository.CategoriaContasRepository;
+
 import jakarta.validation.Valid;
 
 @Service
 public class CategoriaContasService
 {
+    @Autowired
     private CategoriaContasRepository categoriaContasRepository;
-
-    public CategoriaContasService(CategoriaContasRepository categoriaContasRepository)
-    {
-        this.categoriaContasRepository = categoriaContasRepository;
-    }
 
     // Create
     public CategoriaContasResponseDTO salvar(@Valid CategoriaContasRequestDTO dto)

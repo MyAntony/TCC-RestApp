@@ -52,7 +52,7 @@ public class PedidoController
     public ResponseEntity<Map<String, Object>> atualizar(@PathVariable Long idMesa, @PathVariable Long id, @Valid @RequestBody PedidoRequestDTO pedidoRequestDTO)
     {
 
-        pedidoService.atualizar(idMesa, pedidoRequestDTO, id);
+        pedidoService.atualizar(idMesa, id, pedidoRequestDTO);
         return ResponseEntity.ok(Map.of("mensagem", "Pedido atualizado com sucesso"));
     }
 
