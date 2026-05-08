@@ -3,6 +3,7 @@ package com.example.restapp.controller.financeiro;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,13 +28,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/financeiro/fornecedor")
 public class FornecedorController
 {
-
+    @Autowired
     private FornecedorService fornecedorService;
-
-    public FornecedorController(FornecedorService fornecedorService)
-    {
-        this.fornecedorService = fornecedorService;
-    }
 
     @PostMapping // Create - Crud
     // @ResponseStatus(HttpStatus.CREATED) /* <-- utilizar caso não queira utilizar o ResponseEntity */

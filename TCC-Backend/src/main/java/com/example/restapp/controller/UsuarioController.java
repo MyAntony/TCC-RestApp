@@ -3,6 +3,7 @@ package com.example.restapp.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,12 +24,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/usuarios")
 public class UsuarioController
 {
+    @Autowired
     private UsuarioService usuarioService;
-
-    public UsuarioController(UsuarioService usuarioService)
-    {
-        this.usuarioService = usuarioService;
-    }
 
     @GetMapping
     public ResponseEntity<List<UsuarioResponseDTO>> listarUsuarios()

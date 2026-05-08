@@ -1,6 +1,8 @@
 package com.example.restapp.controller;
 
 import jakarta.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,12 +16,9 @@ import java.util.*;
 @RequestMapping("principal/clientes")
 public class ClienteController
 {
+    
+    @Autowired
     private ClienteService clienteService;
-
-    public ClienteController(ClienteService clienteService)
-    {
-        this.clienteService = clienteService;
-    }
 
     @GetMapping
     public List<Cliente> listarTodos()
