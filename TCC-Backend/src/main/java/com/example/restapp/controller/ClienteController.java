@@ -1,15 +1,28 @@
 package com.example.restapp.controller;
 
-import jakarta.validation.Valid;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.example.restapp.model.principal.Cliente;
+import com.example.restapp.dto.cliente.ClienteRequestDTO;
+import com.example.restapp.dto.cliente.ClienteResponseDTO;
 import com.example.restapp.service.ClienteService;
 
-import java.util.*;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -20,30 +33,34 @@ public class ClienteController
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping
-    public List<Cliente> listarTodos()
-    {
-        return clienteService.listarTodos();
-    }
-
+    // Create
     @PostMapping
-    public ResponseEntity<Map<String, Object>> salvar(@Valid @RequestBody Cliente cliente)
+    public ResponseEntity<Map<String, Object>> salvar(@Valid @RequestBody ClienteRequestDTO clienteRequestDTO)
     {
-        clienteService.salvar(cliente);
+        clienteService.salvar(clienteRequestDTO);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(Map.of("mensagem", "Cliente cadastrado com sucesso!"));
     }
 
-    @PutMapping
-    public ResponseEntity<Map<String, Object>> atualizar(@Valid @RequestBody Cliente cliente)
+    @GetMapping
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public List<ClienteResponseDTO> listarTodos()
     {
-        clienteService.atualizar(cliente);
+        return clienteService.listarTodos();
+    }
+
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PutMapping("{idAuxiliar}")
+    public ResponseEntity<Map<String, Object>> atualizar(@PathVariable UUID idAuxiliar, @Valid @RequestBody ClienteRequestDTO clienteRequestDTO)
+    {
+        clienteService.atualizar(idAuxiliar, clienteRequestDTO);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(Map.of("mensagem", "Cliente atualizado com sucesso"));
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> excluir(@PathVariable Long id)
     {

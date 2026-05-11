@@ -1,11 +1,14 @@
 package com.example.restapp.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import com.example.restapp.dto.cliente.ClienteRequestDTO;
+import com.example.restapp.dto.cliente.ClienteResponseDTO;
 import com.example.restapp.model.principal.Cliente;
 import com.example.restapp.repository.ClienteRepository;
 
@@ -18,26 +21,34 @@ public class ClienteService
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public List<Cliente> listarTodos()
+    public ClienteResponseDTO salvar(@Valid ClienteRequestDTO clienteRequestDTO)
     {
-        return clienteRepository.findAll();
+        // Converter DTO para entidade
+        Cliente cliente = new Cliente();
+        cliente.setNome(clienteRequestDTO.getNome());
+        cliente.setCpf(clienteRequestDTO.getCpf());
+        cliente.setTelefone(clienteRequestDTO.getTelefone());
+        cliente.setEmail(clienteRequestDTO.getEmail());
+        cliente.setEndereco(clienteRequestDTO.getEndereco());
+
+        return toResponseDTO(clienteRepository.save(cliente));
     }
 
-    public Cliente salvar(@Valid Cliente cliente)
+    public List<ClienteResponseDTO> listarTodos()
     {
-        return clienteRepository.save(cliente);
+        return clienteRepository.findAll().stream().map(this::toResponseDTO).toList();
     }
 
-    public Cliente atualizar(@Valid Cliente cliente)
+    public ClienteResponseDTO atualizar(UUID idAuxiliar, @Valid ClienteRequestDTO clienteRequestDTO)
     {
-        Cliente clienteAtualizar = clienteRepository.findById(cliente.getId()).orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado."));
-        clienteAtualizar.setNome(cliente.getNome());
-        clienteAtualizar.setCpf(cliente.getCpf());
-        clienteAtualizar.setTelefone(cliente.getTelefone());
-        clienteAtualizar.setEmail(cliente.getEmail());
-        clienteAtualizar.setEndereco(cliente.getEndereco());
-        
-        return clienteRepository.save(clienteAtualizar);
+        Cliente clienteAtualizar = clienteRepository.findByIdAuxiliar(idAuxiliar).orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado."));
+        clienteAtualizar.setNome(clienteRequestDTO.getNome());
+        clienteAtualizar.setCpf(clienteRequestDTO.getCpf());
+        clienteAtualizar.setTelefone(clienteRequestDTO.getTelefone());
+        clienteAtualizar.setEmail(clienteRequestDTO.getEmail());
+        clienteAtualizar.setEndereco(clienteRequestDTO.getEndereco());
+
+        return toResponseDTO(clienteRepository.save(clienteAtualizar));
     }
 
     public void excluir(Long id)
@@ -47,6 +58,16 @@ public class ClienteService
         // Verifica se o cliente está em estoque antes de excluir
 
         clienteRepository.deleteById(clienteExcluir.getId());
+    }
+
+    private ClienteResponseDTO toResponseDTO(Cliente cliente)
+    {
+        ClienteResponseDTO clienteResponseDTO = new ClienteResponseDTO();
+        clienteResponseDTO.setIdAuxiliar(cliente.getIdAuxiliar());
+        clienteResponseDTO.setNome(cliente.getNome());
+        
+        
+        return clienteResponseDTO;
     }
 
 }
