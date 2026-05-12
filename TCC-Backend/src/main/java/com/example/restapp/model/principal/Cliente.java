@@ -1,28 +1,27 @@
 package com.example.restapp.model.principal;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import com.example.restapp.model.Endereco;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+ 
 @Entity
 @Getter // Gera os getters
 @Setter // Gera os setters
 @AllArgsConstructor // Gera o construtor com todos os argumentos
 @NoArgsConstructor // Gera o construtor sem argumentos
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "cpf"))
 public class Cliente
 {
     @Id
@@ -47,6 +46,7 @@ public class Cliente
     // @OneToMany(mappedBy = "cliente")
     // private List<Mesa> mesas= new ArrayList<>();
 
-    @Embedded // Indica que o endereço é um campo embutido
-    private Endereco endereco;
+    @ElementCollection
+    // @CollectionTable(name = "cliente_endereco", joinColumns = @JoinColumn(name = "cliente_id"))
+    private List<Endereco> enderecos = new ArrayList<>();
 }

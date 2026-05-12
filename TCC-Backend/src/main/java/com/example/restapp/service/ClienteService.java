@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import com.example.restapp.dto.cliente.ClienteRequestDTO;
@@ -29,7 +30,7 @@ public class ClienteService
         cliente.setCpf(clienteRequestDTO.getCpf());
         cliente.setTelefone(clienteRequestDTO.getTelefone());
         cliente.setEmail(clienteRequestDTO.getEmail());
-        cliente.setEndereco(clienteRequestDTO.getEndereco());
+        cliente.setEnderecos(clienteRequestDTO.getEnderecos());
 
         return toResponseDTO(clienteRepository.save(cliente));
     }
@@ -39,6 +40,14 @@ public class ClienteService
         return clienteRepository.findAll().stream().map(this::toResponseDTO).toList();
     }
 
+    public ClienteResponseDTO buscarPorIdAuxiliar(UUID idAuxiliar)
+    {
+        Cliente cliente = clienteRepository.findByIdAuxiliar(idAuxiliar)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado."));
+        return toResponseDTO(cliente);
+    }
+
+    @Transactional
     public ClienteResponseDTO atualizar(UUID idAuxiliar, @Valid ClienteRequestDTO clienteRequestDTO)
     {
         Cliente clienteAtualizar = clienteRepository.findByIdAuxiliar(idAuxiliar).orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado."));
@@ -46,7 +55,12 @@ public class ClienteService
         clienteAtualizar.setCpf(clienteRequestDTO.getCpf());
         clienteAtualizar.setTelefone(clienteRequestDTO.getTelefone());
         clienteAtualizar.setEmail(clienteRequestDTO.getEmail());
-        clienteAtualizar.setEndereco(clienteRequestDTO.getEndereco());
+        clienteAtualizar.getEnderecos().clear();
+
+        if (clienteRequestDTO.getEnderecos() != null)
+        {
+            clienteAtualizar.getEnderecos().addAll(clienteRequestDTO.getEnderecos());
+        }
 
         return toResponseDTO(clienteRepository.save(clienteAtualizar));
     }
@@ -65,6 +79,7 @@ public class ClienteService
         ClienteResponseDTO clienteResponseDTO = new ClienteResponseDTO();
         clienteResponseDTO.setIdAuxiliar(cliente.getIdAuxiliar());
         clienteResponseDTO.setNome(cliente.getNome());
+        clienteResponseDTO.setEnderecos(cliente.getEnderecos());
         
         
         return clienteResponseDTO;

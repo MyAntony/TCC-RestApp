@@ -1,11 +1,13 @@
 package com.example.restapp.dto.cliente;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.restapp.model.Endereco;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +22,7 @@ public class ClienteRequestDTO
     @NotBlank(message = "O nome é obrigatório.")
     private String nome;
 
-    @Min(value = 11, message = "O CPF deve conter pelo menos 11 caracteres.")
-    @Max(value = 11, message = "O CPF deve conter no máximo 11 caracteres.")
+    @Size(min = 11, max = 11, message = "O CPF deve conter pelo menos 11 caracteres.")
     private String cpf;
 
     private String telefone;
@@ -29,5 +30,5 @@ public class ClienteRequestDTO
     @Email(message = "O email deve ser válido.")
     private String email;
 
-    private Endereco endereco;
+    private List<Endereco> enderecos = new ArrayList<>();
 }

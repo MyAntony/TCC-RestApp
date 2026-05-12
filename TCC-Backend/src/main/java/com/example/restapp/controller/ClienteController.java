@@ -50,6 +50,14 @@ public class ClienteController
         return clienteService.listarTodos();
     }
 
+    @GetMapping("/{idAuxiliar}")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    public ResponseEntity<ClienteResponseDTO> buscarPorIdAuxiliar(@PathVariable UUID idAuxiliar)
+    {
+        ClienteResponseDTO clienteResponseDTO = clienteService.buscarPorIdAuxiliar(idAuxiliar);
+        return ResponseEntity.ok(clienteResponseDTO);
+    }
+
     @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("{idAuxiliar}")
     public ResponseEntity<Map<String, Object>> atualizar(@PathVariable UUID idAuxiliar, @Valid @RequestBody ClienteRequestDTO clienteRequestDTO)
