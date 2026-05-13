@@ -1,6 +1,7 @@
 package com.example.restapp.service;
 
 import java.util.List;
+import org.springframework.validation.annotation.Validated;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import com.example.restapp.repository.UsuarioRepository;
 import jakarta.validation.Valid;
 
 @Service
+@Validated
 public class UsuarioService
 {
    private UsuarioRepository usuarioRepository;

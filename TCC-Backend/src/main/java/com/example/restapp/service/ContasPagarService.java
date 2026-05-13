@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.example.restapp.dto.contaspagar.ContasPagarRequestDTO;
 import com.example.restapp.dto.contaspagar.ContasPagarResponseDTO;
@@ -19,6 +20,7 @@ import com.example.restapp.repository.FornecedorRepository;
 import jakarta.validation.Valid;
 
 @Service
+@Validated
 public class ContasPagarService
 {
 

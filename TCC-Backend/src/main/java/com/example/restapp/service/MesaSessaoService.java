@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.example.restapp.dto.mesasessao.MesaSessaoRequestDTO;
 import com.example.restapp.dto.mesasessao.MesaSessaoResponseDTO;
@@ -26,6 +27,7 @@ import com.example.restapp.repository.UsuarioRepository;
 import jakarta.validation.Valid;
 
 @Service
+@Validated
 public class MesaSessaoService
 {
     

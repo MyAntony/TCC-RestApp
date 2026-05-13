@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.example.restapp.dto.pagamento.PagamentoRequestDTO;
 import com.example.restapp.dto.pagamento.PagamentoResponseDTO;
@@ -17,6 +18,7 @@ import com.example.restapp.repository.PagamentoRepository;
 import jakarta.validation.Valid;
 
 @Service
+@Validated
 public class PagamentoService
 {
     @Autowired

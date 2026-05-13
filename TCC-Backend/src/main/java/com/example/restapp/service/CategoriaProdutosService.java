@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.example.restapp.dto.categoriaprodutos.CategoriaProdutosRequestDTO;
 import com.example.restapp.dto.categoriaprodutos.CategoriaProdutosResponseDTO;
@@ -13,7 +14,8 @@ import com.example.restapp.repository.CategoriaProdutosRepository;
 
 import jakarta.validation.Valid;
 
-@Service 
+@Service
+@Validated
 public class CategoriaProdutosService
 {
     @Autowired
