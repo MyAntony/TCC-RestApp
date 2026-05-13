@@ -5,8 +5,8 @@ import java.time.LocalDate;
 
 import org.springframework.data.annotation.CreatedDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,17 +30,17 @@ public class Produto
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(nullable = false)
+    @Column(nullable = false)
     private String nomeProduto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "categoria_produtos_id", nullable = false)
     private CategoriaProdutos categoriaProdutos;
 
-    @JoinColumn(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal precoCusto;
 
-    @JoinColumn(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal precoVenda;
 
     private String descricao;

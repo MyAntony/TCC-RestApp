@@ -33,7 +33,7 @@ public class ProdutoController
     private ProdutoService produtoService;
 
     @PostMapping // Create - Crud
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    // @PreAuthorize("hasRole('ADMINISTRADOR')")
     public ResponseEntity<Map<String, Object>> salvar(@Valid @RequestBody ProdutoRequestDTO produtoRequestDTO)
     {
         produtoService.salvar(produtoRequestDTO);

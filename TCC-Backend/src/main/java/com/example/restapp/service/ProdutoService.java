@@ -1,17 +1,20 @@
 package com.example.restapp.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
 import com.example.restapp.dto.produto.ProdutoRequestDTO;
 import com.example.restapp.dto.produto.ProdutoResponseDTO;
 import com.example.restapp.model.produtos.CategoriaProdutos;
 import com.example.restapp.model.produtos.Produto;
 import com.example.restapp.repository.CategoriaProdutosRepository;
 import com.example.restapp.repository.ProdutoRepository;
+
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Validated
@@ -37,8 +40,7 @@ public class ProdutoService
         produto.setDescricao(produtoRequestDTO.getDescricao());
         produto.setImagem(produtoRequestDTO.getImagem());
         
-        produtoRepository.save(produto);
-        return toResponseDTO(produto);
+        return toResponseDTO(produtoRepository.save(produto));
     }
 
     // Read
@@ -75,8 +77,7 @@ public class ProdutoService
         produto.setDescricao(produtoRequestDTO.getDescricao());
         produto.setImagem(produtoRequestDTO.getImagem());
         
-        produtoRepository.save(produto);
-        return toResponseDTO(produto);
+        return toResponseDTO(produtoRepository.save(produto));
     }
 
     // Delete
@@ -92,15 +93,24 @@ public class ProdutoService
     // Método auxiliar para converter Produto em ProdutoResponseDTO
     private ProdutoResponseDTO toResponseDTO(Produto produto)
     {
-        return new ProdutoResponseDTO(
-                produto.getId(),
-                produto.getNomeProduto(),
-                produto.getCategoriaProdutos().getNomeCategoriaProdutos(),
-                produto.getPrecoCusto(),
-                produto.getPrecoVenda(),
-                produto.getDescricao(),
-                produto.getImagem()
-        );
+        ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO();
+        produtoResponseDTO.setId(produto.getId());
+        produtoResponseDTO.setNomeProduto(produto.getNomeProduto());
+        produtoResponseDTO.setNomeCategoria(produto.getCategoriaProdutos().getNomeCategoriaProdutos());
+        produtoResponseDTO.setPrecoCusto(produto.getPrecoCusto());
+        produtoResponseDTO.setPrecoVenda(produto.getPrecoVenda());
+        produtoResponseDTO.setDescricao(produto.getDescricao());
+        produtoResponseDTO.setImagem(produto.getImagem());
+        // return new ProdutoResponseDTO(
+        //         produto.getId(),
+        //         produto.getNomeProduto(),
+        //         produto.getCategoriaProdutos().getNomeCategoriaProdutos(),
+        //         produto.getPrecoCusto(),
+        //         produto.getPrecoVenda(),
+        //         produto.getDescricao(),
+        //         produto.getImagem()
+        // );
+        return produtoResponseDTO;
     }
 
 }
