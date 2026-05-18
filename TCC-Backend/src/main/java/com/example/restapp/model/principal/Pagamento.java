@@ -3,6 +3,8 @@ package com.example.restapp.model.principal;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,6 +12,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.example.restapp.model.Usuario;
 import com.example.restapp.model.financeiro.MetodoPagamento;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -44,9 +47,10 @@ public class Pagamento
 
     @ManyToOne
     @JoinColumn(nullable = false, updatable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private MesaSessao mesaSessao;
 
-    @JoinColumn(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false)
     private BigDecimal valorPagamento;
 
     @ManyToOne
@@ -54,6 +58,6 @@ public class Pagamento
     private MetodoPagamento metodoPagamento;
 
     @CreatedDate
-    @JoinColumn(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false)
     private LocalDateTime horarioLancamento;
 }

@@ -2,6 +2,7 @@ package com.example.restapp.dto.mesasessao;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.restapp.dto.pagamento.PagamentoResponseDTO;
@@ -27,8 +28,8 @@ public class MesaSessaoResponseDTO
     private LocalDateTime horarioAbertura;
     @JsonFormat(pattern = "dd-MM-yyyy 'T' HH:mm:ss")
     private LocalDateTime horarioFechamento;
-    private List<PedidoResumoDTO> pedidos;
-    private List<PagamentoResponseDTO> pagamentos;
+    private List<PedidoResumoDTO> pedidos = new ArrayList<>();
+    private List<PagamentoResponseDTO> pagamentos = new ArrayList<>();
     private BigDecimal valorTotalMesa;
     private BigDecimal taxaServico;
     private BigDecimal valorTotalMesaServico;

@@ -46,7 +46,7 @@ public class Cliente
     // @OneToMany(mappedBy = "cliente")
     // private List<Mesa> mesas= new ArrayList<>();
 
-    @ElementCollection
-    // @CollectionTable(name = "cliente_endereco", joinColumns = @JoinColumn(name = "cliente_id"))
-    private List<Endereco> enderecos = new ArrayList<>();
+    // @ElementCollection
+    // // @CollectionTable(name = "cliente_endereco", joinColumns = @JoinColumn(name = "cliente_id"))
+    // private List<Endereco> enderecos = new ArrayList<>();
 }

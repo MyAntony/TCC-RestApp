@@ -30,7 +30,7 @@ public class ClienteService
         cliente.setCpf(clienteRequestDTO.getCpf());
         cliente.setTelefone(clienteRequestDTO.getTelefone());
         cliente.setEmail(clienteRequestDTO.getEmail());
-        cliente.setEnderecos(clienteRequestDTO.getEnderecos());
+        // cliente.setEnderecos(clienteRequestDTO.getEnderecos());
 
         return toResponseDTO(clienteRepository.save(cliente));
     }
@@ -55,12 +55,12 @@ public class ClienteService
         clienteAtualizar.setCpf(clienteRequestDTO.getCpf());
         clienteAtualizar.setTelefone(clienteRequestDTO.getTelefone());
         clienteAtualizar.setEmail(clienteRequestDTO.getEmail());
-        clienteAtualizar.getEnderecos().clear();
+        // clienteAtualizar.getEnderecos().clear();
 
-        if (clienteRequestDTO.getEnderecos() != null)
-        {
-            clienteAtualizar.getEnderecos().addAll(clienteRequestDTO.getEnderecos());
-        }
+        // if (clienteRequestDTO.getEnderecos() != null)
+        // {
+        //     clienteAtualizar.getEnderecos().addAll(clienteRequestDTO.getEnderecos());
+        // }
 
         return toResponseDTO(clienteRepository.save(clienteAtualizar));
     }
@@ -79,7 +79,7 @@ public class ClienteService
         ClienteResponseDTO clienteResponseDTO = new ClienteResponseDTO();
         clienteResponseDTO.setIdAuxiliar(cliente.getIdAuxiliar());
         clienteResponseDTO.setNome(cliente.getNome());
-        clienteResponseDTO.setEnderecos(cliente.getEnderecos());
+        // clienteResponseDTO.setEnderecos(cliente.getEnderecos());
         
         
         return clienteResponseDTO;

@@ -12,8 +12,8 @@ import com.example.restapp.model.principal.Mesa;
 import com.example.restapp.repository.MesaRepository;
 import com.example.restapp.repository.MetodoPagamentoRepository;
 import com.example.restapp.repository.UsuarioRepository;
+
 import jakarta.annotation.PostConstruct;
-import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -26,7 +26,7 @@ public class DataInitializer
 
     private final MesaRepository mesaRepository;
     private final MetodoPagamentoRepository metodoPagamentoRepository;
-    private final EntityManager entityManager;
+    // private final EntityManager entityManager;
 
     // public DataInitializer(UsuarioRepository usuarioRepository, BCryptPasswordEncoder passwordEncoder, MesaRepository mesaRepository)
     // {
@@ -47,24 +47,24 @@ public class DataInitializer
     }
 
     // Método para executar SQL nativo
-    private void executarSQL(String sql)
-    {
-        try
-        {
-            entityManager.createNativeQuery(sql).executeUpdate();
-            System.out.println("SQL executado com sucesso: " + sql.substring(0, 50) + "...");
-        } catch (Exception e)
-        {
-            System.err.println("Erro ao executar SQL: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+    // private void executarSQL(String sql)
+    // {
+    //     try
+    //     {
+    //         entityManager.createNativeQuery(sql).executeUpdate();
+    //         System.out.println("SQL executado com sucesso: " + sql.substring(0, 50) + "...");
+    //     } catch (Exception e)
+    //     {
+    //         System.err.println("Erro ao executar SQL: " + e.getMessage());
+    //         e.printStackTrace();
+    //     }
+    // }
 
     @PostConstruct
     public void init()
     {
         // Executar alteração de Foreign Key
-        executarForeignKeyAlteracao();
+        // executarForeignKeyAlteracao();
 
         // Verifica se já existe algum usuário no banco
         if (usuarioRepository.findAll().isEmpty())
@@ -116,22 +116,22 @@ public class DataInitializer
     }
 
     // Método para alterar a Foreign Key com ON DELETE CASCADE
-    private void executarForeignKeyAlteracao()
-    {
-        try
-        {
-            // Remove a constraint antiga
-            executarSQL("ALTER TABLE `restapp`.`pedido` DROP FOREIGN KEY `FKf32po93klqxcumfjsf303g2vl`");
+    // private void executarForeignKeyAlteracao()
+    // {
+    //     try
+    //     {
+    //         // Remove a constraint antiga
+    //         executarSQL("ALTER TABLE `restapp`.`pedido` DROP FOREIGN KEY `FKf32po93klqxcumfjsf303g2vl`");
             
-            // Adiciona a nova constraint com ON DELETE CASCADE
-            executarSQL("ALTER TABLE `restapp`.`pedido` ADD CONSTRAINT `FKf32po93klqxcumfjsf303g2vl` " +
-                       "FOREIGN KEY (`mesa_sessao_id`) REFERENCES `restapp`.`mesa_sessao` (`id`) " +
-                       "ON DELETE CASCADE");
+    //         // Adiciona a nova constraint com ON DELETE CASCADE
+    //         executarSQL("ALTER TABLE `restapp`.`pedido` ADD CONSTRAINT `FKf32po93klqxcumfjsf303g2vl` " +
+    //                    "FOREIGN KEY (`mesa_sessao_id`) REFERENCES `restapp`.`mesa_sessao` (`id`) " +
+    //                    "ON DELETE CASCADE");
             
-            System.out.println("Foreign Key alterada com sucesso!");
-        } catch (Exception e)
-        {
-            System.err.println("Aviso: Foreign Key pode já estar configurada ou erro ao alterá-la: " + e.getMessage());
-        }
-    }
+    //         System.out.println("Foreign Key alterada com sucesso!");
+    //     } catch (Exception e)
+    //     {
+    //         System.err.println("Aviso: Foreign Key pode já estar configurada ou erro ao alterá-la: " + e.getMessage());
+    //     }
+    // }
 }

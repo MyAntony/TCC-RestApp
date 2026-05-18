@@ -68,10 +68,12 @@ public class MesaSessaoController
 
     // Update
     @PutMapping("/{id}")
-    public ResponseEntity<MesaSessaoResponseDTO> atualizarMesa(@PathVariable Long id, @RequestBody MesaSessaoRequestDTO mesaRequestDTO)
+    public ResponseEntity<Map<String, Object>> atualizarMesa(@PathVariable Long id, @RequestBody MesaSessaoRequestDTO mesaRequestDTO)
     {
-        MesaSessaoResponseDTO mesaResponseDTO = mesaService.atualizar(id, mesaRequestDTO);
-        return new ResponseEntity<>(mesaResponseDTO, HttpStatus.OK);
+        // MesaSessaoResponseDTO mesaResponseDTO = mesaService.atualizar(id, mesaRequestDTO);
+        // return new ResponseEntity<>(mesaResponseDTO, HttpStatus.OK);
+        mesaService.atualizar(id, mesaRequestDTO);
+        return ResponseEntity.ok(Map.of("mensagem", "Mesa atualizada com sucesso!"));
     }
 
     // Delete

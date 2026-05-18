@@ -14,4 +14,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long>
 {
     List<Cliente> findByNomeContainingIgnoreCase(String nome);
     Optional<Cliente> findByIdAuxiliar(UUID idAuxiliar);
+
+    Cliente getReferenceById(Long id);
 }
