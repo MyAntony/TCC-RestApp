@@ -24,6 +24,6 @@ public class MesaSessaoRequestDTO
     private Integer quantidadePessoas;
     private Long idCliente;
     private StatusMesa status;
-    // private BigDecimal taxaServico;
+    private BigDecimal taxaServico;
     
 }

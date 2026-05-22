@@ -1,6 +1,7 @@
 package com.example.restapp.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -183,118 +184,118 @@ public class MesaSessaoService
         //         .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
         // }
 
-        // BigDecimal valorTotalMesa = pedidoService.listarPedidosDaMesa(id)
-        // .stream()
-        // .map(PedidoResumoDTO::getValorTotal)
-        // .reduce(BigDecimal.ZERO, BigDecimal::add);
+         BigDecimal valorTotalMesa = pedidoService.listarPedidosDaMesa(id)
+         .stream()
+         .map(PedidoResumoDTO::getValorTotal)
+         .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        // mesaExistente.setValorTotalMesa(valorTotalMesa); // A jamanta esqueceu de colocar pra enviar o valor total da mesa ao atualizar
+        mesaExistente.setValorTotalMesa(valorTotalMesa); // A jamanta esqueceu de colocar pra enviar o valor total da mesa ao atualizar
 
-        // BigDecimal taxaServico;
+         BigDecimal taxaServico;
 
-        // if (mesaSessaoRequestDTO.getTaxaServico() == null)
-        // {
-        //     taxaServico = valorTotalMesa.multiply(new BigDecimal("0.10")); // Alterar para uma configuração que possa ser alterada pelo usuário no futuro
-        //     mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
-        // } else
-        // {
-        //     taxaServico = mesaSessaoRequestDTO.getTaxaServico();
-        // }
+         if (mesaSessaoRequestDTO.getTaxaServico() == null)
+         {
+             taxaServico = valorTotalMesa.multiply(new BigDecimal("0.10")); // Alterar para uma configuração que possa ser alterada pelo usuário no futuro
+             mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
+         } else
+         {
+             taxaServico = mesaSessaoRequestDTO.getTaxaServico();
+         }
 
-        // mesaExistente.setTaxaServico(taxaServico);
+         mesaExistente.setTaxaServico(taxaServico);
 
         // // mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
 
 
-        // if (mesaSessaoRequestDTO.getStatus() == StatusMesa.FECHADA)
-        // {
-        //     // // Calcular total da mesa
-        //     // BigDecimal valorTotalMesa = pedidoService.listarPedidosDaMesa(id)
-        //     // .stream()
-        //     // .map(PedidoResumoDTO::getValorTotal)
-        //     // .reduce(BigDecimal.ZERO, BigDecimal::add);
+         if (mesaSessaoRequestDTO.getStatus() == StatusMesa.FECHADA)
+         {
+             // // Calcular total da mesa
+             // BigDecimal valorTotalMesa = pedidoService.listarPedidosDaMesa(id)
+             // .stream()
+             // .map(PedidoResumoDTO::getValorTotal)
+             // .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        //     // BigDecimal taxaServico;
+             // BigDecimal taxaServico;
 
-        //     // if (MesaSessaoRequestDTO.getTaxaServico() == null)
-        //     // {
-        //     //     taxaServico = valorTotalMesa.multiply(new BigDecimal("0.10")); // Alterar para uma configuração que possa ser alterada pelo usuário no futuro
-        //     // } else
-        //     // {
-        //     //     taxaServico = MesaSessaoRequestDTO.getTaxaServico();
-        //     // }
+             // if (MesaSessaoRequestDTO.getTaxaServico() == null)
+             // {
+             //     taxaServico = valorTotalMesa.multiply(new BigDecimal("0.10")); // Alterar para uma configuração que possa ser alterada pelo usuário no futuro
+             // } else
+             // {
+             //     taxaServico = MesaSessaoRequestDTO.getTaxaServico();
+             // }
 
-        //     // Salvar taxa na mesa
-        //     mesaExistente.setTaxaServico(taxaServico);
+             // Salvar taxa na mesa
+             mesaExistente.setTaxaServico(taxaServico);
 
-        //     // // Calcular total com serviço
-        //     // BigDecimal valorTotalMesaServico = valorTotalMesa.add(taxaServico);
+             // // Calcular total com serviço
+             // BigDecimal valorTotalMesaServico = valorTotalMesa.add(taxaServico);
 
-        //     // Calcular pagamentos já realizados
-        //     BigDecimal totalPagamentos = pagamentoService.listarPagamentosPorMesa(id)
-        //         .stream()
-        //         .map(PagamentoResponseDTO::getValorPagamento)
-        //         .reduce(BigDecimal.ZERO, BigDecimal::add);
+             // Calcular pagamentos já realizados
+             BigDecimal totalPagamentos = pagamentoService.listarPagamentosPorMesa(id)
+                 .stream()
+                 .map(PagamentoResponseDTO::getValorPagamento)
+                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        //     // Validar pagamento mínimo
-        //     if (totalPagamentos.compareTo(valorTotalMesa) < 0)
-        //     {
-        //         BigDecimal falta = valorTotalMesa.subtract(totalPagamentos);
-        //         throw new RuntimeException("Não é possível fechar a mesa. Ainda faltam R$ " +  String.format("%.2f", falta));
-        //     }
+             // Validar pagamento mínimo
+             if (totalPagamentos.compareTo(valorTotalMesa) < 0)
+             {
+                 BigDecimal falta = valorTotalMesa.subtract(totalPagamentos);
+                 throw new RuntimeException("Não é possível fechar a mesa. Ainda faltam R$ " +  String.format("%.2f", falta));
+             }
 
-        //     // Calcula o quanto sobra após pagar a mesa
-        //     BigDecimal sobressalente = totalPagamentos.subtract(valorTotalMesa);
+             // Calcula o quanto sobra após pagar a mesa
+             BigDecimal sobressalente = totalPagamentos.subtract(valorTotalMesa);
 
-        //     // Se não pagou nada da taxa
-        //     if (sobressalente.compareTo(BigDecimal.ZERO) == 0)
-        //     {
-        //         // Taxa não paga
-        //         mesaExistente.setTaxaServico(taxaServico);
-        //         mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
-        //     }
+             // Se não pagou nada da taxa
+             if (sobressalente.compareTo(BigDecimal.ZERO) == 0)
+             {
+                 // Taxa não paga
+                 mesaExistente.setTaxaServico(taxaServico);
+                 mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
+             }
 
-        //     // Se pagou parte da taxa
-        //     else if (sobressalente.compareTo(taxaServico) < 0)
-        //     {
-        //         // Pagou parcialmente
-        //         mesaExistente.setTaxaServico(taxaServico); // taxa inteira prevista
-        //         mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
-        //     }
+             // Se pagou parte da taxa
+             else if (sobressalente.compareTo(taxaServico) < 0)
+             {
+                 // Pagou parcialmente
+                 mesaExistente.setTaxaServico(taxaServico); // taxa inteira prevista
+                 mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
+             }
 
-        //     // Se pagou exatamente a taxa
-        //     else if (sobressalente.compareTo(taxaServico) == 0)
-        //     {
-        //         mesaExistente.setTaxaServico(taxaServico);
-        //         mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
-        //     }
+             // Se pagou exatamente a taxa
+             else if (sobressalente.compareTo(taxaServico) == 0)
+             {
+                 mesaExistente.setTaxaServico(taxaServico);
+                 mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(taxaServico));
+             }
 
-        //     // Se pagou mais do que a taxa (excedente)
-        //     else
-        //     {
-        //         // Quanto excedeu após pagar taxa
-        //         BigDecimal excedente = sobressalente.subtract(taxaServico);
+             // Se pagou mais do que a taxa (excedente)
+             else
+             {
+                 // Quanto excedeu após pagar taxa
+                 BigDecimal excedente = sobressalente.subtract(taxaServico);
 
-        //         // soma o excedente como gorjeta adicional
-        //         BigDecimal novaTaxa = taxaServico.add(excedente);
+                 // soma o excedente como gorjeta adicional
+                 BigDecimal novaTaxa = taxaServico.add(excedente);
 
-        //         mesaExistente.setTaxaServico(novaTaxa);
-        //         mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(novaTaxa));
-        //     }
+                 mesaExistente.setTaxaServico(novaTaxa);
+                 mesaExistente.setValorTotalMesaServico(valorTotalMesa.add(novaTaxa));
+             }
 
-        //     mesaExistente.setHorarioFechamento(java.time.LocalDateTime.now());
-        //     mesaExistente.setValorTotalMesa(valorTotalMesa);
-        //     // mesaExistente.setValorTotalMesaServico(valorTotalMesaServico);
-        // }
+             mesaExistente.setHorarioFechamento(java.time.LocalDateTime.now());
+             mesaExistente.setValorTotalMesa(valorTotalMesa);
+             // mesaExistente.setValorTotalMesaServico(valorTotalMesaServico);
+         }
         // // Se o usuário não enviou taxa, calcula 10%
         // if (MesaSessaoRequestDTO.getTaxaServico() == null)
         // {
         //     BigDecimal taxaServico = valorTotalMesa.multiply(new BigDecimal("0.10"));
         // }
 
-        // List<StatusMesa> statusAbertos = Arrays.asList(StatusMesa.OCUPADA, StatusMesa.FECHAMENTO);
+//         List<StatusMesa> statusAbertos = Arrays.asList(StatusMesa.OCUPADA, StatusMesa.FECHAMENTO);
 
-        // boolean existeSessaoAberta = mesaSessaoRepository.existsByMesaIdAndStatusIn(MesaSessaoRequestDTO.getNumeroMesa(), statusAbertos);
+//         boolean existeSessaoAberta = mesaSessaoRepository.existsByMesaIdAndStatusIn(MesaSessaoRequestDTO.getNumeroMesa(), statusAbertos);
 
         // if (existeSessaoAberta)
         // {
@@ -347,12 +348,26 @@ public class MesaSessaoService
         mesaSessaoResponseDTO.setNumeroMesa(mesaSessao.getMesa().getId());
         mesaSessaoResponseDTO.setQuantidadePessoas(mesaSessao.getQuantidadePessoas());
         mesaSessaoResponseDTO.setNomeCliente(mesaSessao.getCliente() != null ? mesaSessao.getCliente().getNome() : null);
-        mesaSessaoResponseDTO.setNomeCliente(mesaSessao.getCliente().getNome());
+        // mesaSessaoResponseDTO.setNomeCliente(mesaSessao.getCliente().getNome());
         mesaSessaoResponseDTO.setStatus(mesaSessao.getStatus());
         mesaSessaoResponseDTO.setHorarioAbertura(mesaSessao.getHorarioAbertura());
         mesaSessaoResponseDTO.setHorarioFechamento(mesaSessao.getHorarioFechamento());
         mesaSessaoResponseDTO.setPedidos(pedidosDTO);
         mesaSessaoResponseDTO.setPagamentos(pagamentosDTO);
+
+        
+        /* Maneira alternativa de se fazer a listagem de pedidos e pagamentos */
+        // try
+        // {
+        //     mesaSessaoResponseDTO.setPedidos(pedidoService.listarPedidosDaMesa(mesaSessao.getId()));
+        //     mesaSessaoResponseDTO.setPagamentos(pagamentoService.listarPagamentosPorMesa(mesaSessao.getId()));
+        // } catch (Exception e)
+        // {
+        //     // Evita que falhas de carregamento de listas quebrem a resposta básica da mesa
+        //     mesaSessaoResponseDTO.setPedidos(new ArrayList<>());
+        //     mesaSessaoResponseDTO.setPagamentos(new ArrayList<>());
+        // }
+
         mesaSessaoResponseDTO.setValorTotalMesa(mesaSessao.getValorTotalMesa());
         mesaSessaoResponseDTO.setTaxaServico(mesaSessao.getTaxaServico());
         // mesaSessaoResponseDTO.setValorTotalMesaServico(valorTotalMesaServico);

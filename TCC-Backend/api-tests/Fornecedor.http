@@ -1,0 +1,66 @@
+# Cadastro de Fornecedores
+
+###
+# @name Create
+POST http://localhost:8080/financeiro/fornecedor
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nomeFantasia": "Flip Fundo de Investimento em Direitos Creditorios Multisegmentos - Responsabilidade Limitada",
+  "razaoSocial": "Flip Fundo de Investimento em Direitos Creditorios Multisegmentos - Responsabilidade Limitada",
+  "tipoDocumento": "CNPJ",
+  "cpf": null,
+  "cnpj": "60354694000197",
+  "telefone": "(41) 3074-0909",
+  "email": "contabilidade@finaxis.com.br",
+  "endereco": {
+    "cep": "01310-923",
+    "rua": "Avenida Paulista",
+    "numero": "1842",
+    "bairro": "Bela Vista",
+    "cidade": "Feira de Santana",
+    "estado": "São Paulo",
+    "complemento": "Terreotorre Norte Loja 08"
+  }
+}
+
+###
+# @name Read
+GET http://localhost:8080/financeiro/fornecedor
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+###
+# @name Update
+PUT http://localhost:8080/financeiro/fornecedor
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 1,
+  "nomeFantasia": "Restaurante Encantos da Maré",
+  "razaoSocial": "Restaurante Encantos do Bonfim LTDA",
+  "tipoDocumento": "CNPJ",
+   "cpf": null,
+  "cnpj": "53107069000185",
+  "telefone": "(71) 99397-0139",
+  "email": "contato@encantosdamare.com.br",
+  "endereco": {
+    "cep": "40415-430",
+    "rua": "Largo Do Bonfim",
+    "numero": "27",
+    "bairro": "Bonfim",
+    "cidade": "Salvador",
+    "estado": "Bahia",
+    "complemento": "Casa Térreo"
+  }
+}
+
+###
+# @name Delete
+DELETE http://localhost:8080/financeiro/fornecedor/2
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+Accept: application/json

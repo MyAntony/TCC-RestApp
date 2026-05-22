@@ -1,0 +1,35 @@
+###Create
+POST http://localhost:8080/usuarios
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nome": "Camila Viana Lopes",
+  "email": "camilavianalopes12@gmail.com",
+  "senha": "123456",
+  "cargo": "ADMINISTRADOR"
+}
+
+###Read
+GET http://localhost:8080/usuarios
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+###Update
+PUT http://localhost:8080/usuarios/3
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "nome": "Antony Rafael dos Santos Rufino",
+  "email": "antony26rafael@gmail.com",
+  "senha": "123456",
+  "cargo": "ADMINISTRADOR"
+}
+
+###Delete
+DELETE http://localhost:8080/usuarios/2
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json

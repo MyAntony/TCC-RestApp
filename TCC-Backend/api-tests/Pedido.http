@@ -1,0 +1,48 @@
+# Cadastro de Pedidos
+
+###
+# @name Create
+POST http://localhost:8080/principal/pedidos/mesa/2
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "idProduto": 1,
+  "descricaoPedido": null,
+  "quantidadeProduto": 1
+}
+
+
+###
+# @name Read
+GET http://localhost:8080/principal/pedidos
+Authorization: Bearer {{auth_token}}
+
+###
+# @name Read por Mesa
+GET http://localhost:8080/principal/pedidos/9
+Authorization: Bearer {{auth_token}}
+
+###
+# @name Read com Pesquisa
+GET http://localhost:8080/produtos/categoria-produtos/buscar?
+    nomeCategoriaProdutos=Refrigerantes
+Authorization: Bearer {{auth_token}}
+
+###
+# @name Update
+PUT http://localhost:8080/principal/mesas/3/pedidos/10
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "idProduto": 2,
+  "descricaoPedido": "Pedido de teste",
+  "quantidadeProduto": 1
+}
+
+
+###
+# @name Delete
+DELETE http://localhost:8080/principal/pedidos/mesa/3/13
+Authorization: Bearer {{auth_token}}

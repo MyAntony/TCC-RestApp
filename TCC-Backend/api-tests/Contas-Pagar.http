@@ -1,0 +1,47 @@
+# Contas a Pagar
+
+###
+# @name Create
+POST http://localhost:8080/financeiro/contas-pagar/2
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "categoriaId": 4,
+  "fornecedorId": 2,
+  "descricao": "Aquisição de Refrigerantes",
+  "dataVencimento": "2025-10-25",
+  "valor": 200.50,
+  "dataPagamento": null,
+  "statusPagamento": "PENDENTE"
+}
+
+
+###
+# @name Read
+GET http://localhost:8080/financeiro/contas-pagar
+Authorization: Bearer {{auth_token}}
+
+###
+# @name Update
+PUT http://localhost:8080/financeiro/contas-pagar/2
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "categoriaId": 4,
+  "fornecedorId": 5,
+  "descricao": "Compra de peixes",
+  "dataVencimento": "2025-10-25",
+  "valor": 200.50,
+  "dataPagamento": null,
+  "statusPagamento": "PENDENTE"
+}
+
+
+###
+# @name Delete
+DELETE http://localhost:8080/financeiro/contas-pagar/1
+Authorization: Bearer {{auth_token}}

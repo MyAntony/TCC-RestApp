@@ -1,0 +1,39 @@
+### POST request to example server
+POST http://localhost:8080/produtos/categoria-produtos
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+{
+  "nomeCategoriaProdutos": "Refrigerantes",
+  "descricaoCategoriaProdutos": null
+}
+
+###
+GET http://localhost:8080/produtos/categoria-produtos
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+GET http://localhost:8080/produtos/categoria-produtos/buscar?nomeCategoria=Alimentos
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+PUT http://localhost:8080/produtos/categoria-produtos/2
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+{
+  "nomeCategoriaProdutos": "Refrigerantes",
+  "descricaoCategoriaProdutos": null
+}
+
+###
+DELETE http://localhost:8080/produtos/categoria-produtos/
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Accept: application/json

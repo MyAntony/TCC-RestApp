@@ -1,0 +1,66 @@
+# Cadastro de Clientes
+
+###
+# @name Create
+POST http://localhost:8080/principal/clientes
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "nome": "Antony Rafael dos Santos Rufino",
+  "cpf": null,
+  "telefone": "+55 71 98952-0146",
+  "email": "antony05rafael@gmail.com",
+  "endereco": {
+    "cep": "40420-070",
+    "rua": "Rua 11 de Maio",
+    "numero": "10",
+    "bairro": "Ribeira",
+    "cidade": "Salvador",
+    "estado": "Bahia",
+    "complemento": "Prédio verde"
+  }
+}
+
+###
+# @name Read
+GET http://localhost:8080/principal/clientes/5cf34b9b-bfbb-4d53-8e80-fed81e2a054c
+Authorization: Bearer {{auth_token}}
+
+###
+# @name Update
+PUT http://localhost:8080/principal/clientes/5cf34b9b-bfbb-4d53-8e80-fed81e2a054c
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "nome": "Antony Rafael dos Santos Rufino",
+  "cpf": null,
+  "telefone": "+55 71 98952-0146",
+  "email": "antony05rafael@gmail.com",
+  "enderecos": [
+    {
+      "cep": "40420-070",
+      "rua": "Rua 11 de Maio",
+      "numero": "10",
+      "bairro": "Ribeira",
+      "cidade": "Salvador",
+      "estado": "Bahia",
+      "complemento": "Prédio verde"
+    },
+    {
+      "cep": "40415-135",
+      "rua": "Rua Teodósio Rodrigues de Jesus",
+      "numero": "26",
+      "bairro": "Bonfim",
+      "cidade": "Salvador",
+      "estado": "Bahia",
+      "complemento": "Vila Brandão"
+    }
+  ]
+}
+
+###
+# @name Delete
+DELETE http://localhost:8080/principal/clientes/2
+Authorization: Bearer {{auth_token}}

@@ -1,6 +1,8 @@
 package com.example.restapp.service;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,40 +19,58 @@ import jakarta.validation.Valid;
 @Validated
 public class UsuarioService
 {
-   private UsuarioRepository usuarioRepository;
-   private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository, BCryptPasswordEncoder bCryptPasswordEncoder)
-    {
-        this.usuarioRepository = usuarioRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
 
-    public Usuario salvarUsuario(@Valid UsuarioRequestDTO dto)
+    public Usuario salvarUsuario(@Valid UsuarioRequestDTO usuarioRequestDTO)
     {
-        usuarioRepository.findByEmail(dto.getEmail())
+        usuarioRepository.findByEmail(usuarioRequestDTO.getEmail())
             .ifPresent(u -> { throw new IllegalArgumentException("E-mail já cadastrado!"); });
 
         Usuario usuario = new Usuario();
-        usuario.setNome(dto.getNome());
-        usuario.setEmail(dto.getEmail());
-        usuario.setCargo(dto.getCargo());
-        usuario.setSenha(bCryptPasswordEncoder.encode(dto.getSenha())); // Criptografando a senha.
+        usuario.setNome(usuarioRequestDTO.getNome());
+        usuario.setEmail(usuarioRequestDTO.getEmail());
+        usuario.setCargo(usuarioRequestDTO.getCargo());
+        usuario.setSenha(bCryptPasswordEncoder.encode(usuarioRequestDTO.getSenha())); // Criptografando a senha.
 
         return usuarioRepository.save(usuario);
     }
 
-public List<UsuarioResponseDTO> listarUsuarios()
-{
-    return usuarioRepository.findAll()
-        .stream()
-        .map(this::toDTO)
-        .toList();
-}
+    // Read
+    public List<UsuarioResponseDTO> listarUsuarios()
+    {
+        return usuarioRepository.findAll()
+            .stream()
+            .map(this::toResponseDTO)
+            .toList();
+    }
 
-private UsuarioResponseDTO toDTO(Usuario usuario)
-{
-    return new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getCargo());
-}
+    // Put
+    public UsuarioResponseDTO atualizarUsuario(Long id, @Valid UsuarioRequestDTO usuarioRequestDTO)
+    {
+        Usuario atualizarUsuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+        atualizarUsuario.setNome(usuarioRequestDTO.getNome());
+        atualizarUsuario.setEmail(usuarioRequestDTO.getEmail());
+        atualizarUsuario.setCargo(usuarioRequestDTO.getCargo());
+        atualizarUsuario.setSenha(usuarioRequestDTO.getSenha());
+
+        return toResponseDTO(usuarioRepository.save(atualizarUsuario));
+    }
+
+    // Delete
+    public void excluirUsuario(Long id)
+    {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+
+        usuarioRepository.deleteById(usuario.getId());
+    }
+
+    private UsuarioResponseDTO toResponseDTO(Usuario usuario)
+    {
+        return new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getCargo());
+    }
 
 }

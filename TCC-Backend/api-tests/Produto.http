@@ -1,0 +1,47 @@
+###
+POST http://localhost:8080/produtos/produto
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+{
+  "nomeProduto": "Sprite KS 350ml",
+  "idCategoriaProdutos": 1,
+  "precoCusto": 3.00,
+  "precoVenda": 6.00,
+  "descricao": "Refrigerante engarrafado gelado 295ml",
+  "imagem": null
+}
+
+###
+GET http://localhost:8080/produtos/produto
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+### GET com pesquisa
+GET http://localhost:8080/produtos/produto/buscar?nomeProduto=Coca-Cola
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+PUT http://localhost:8080/produtos/produto/
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+{
+  "nomeProduto": "Fanta KS 350ml",
+  "idCategoriaProdutos": 2,
+  "precoCusto": 3.00,
+  "precoVenda": 6.00,
+  "descricao": "Refrigerante engarrafado 295ml",
+  "imagem": null
+}
+
+###
+DELETE http://localhost:8080/produtos/produto/6
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+Accept: application/json
