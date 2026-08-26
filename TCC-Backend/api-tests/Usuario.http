@@ -24,7 +24,7 @@ Accept: application/json
 
 {
   "nome": "Antony Rafael dos Santos Rufino",
-  "email": "antony26rafael@gmail.com",
+  "email": "antony05rafael@gmail.com",
   "senha": "123456",
   "cargo": "ADMINISTRADOR"
 }

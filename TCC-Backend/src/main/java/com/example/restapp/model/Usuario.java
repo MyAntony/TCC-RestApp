@@ -12,6 +12,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Getter // Gera os getters
 @Setter // Gera os setters
@@ -22,6 +24,9 @@ public class Usuario
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, updatable = false, unique = true)
+    private UUID idAuxiliar = UUID.randomUUID();
 
     @Column(nullable = false)
     private String nome;

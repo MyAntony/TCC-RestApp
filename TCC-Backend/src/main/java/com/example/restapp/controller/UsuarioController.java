@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.restapp.dto.usuario.UsuarioRequestDTO;
@@ -23,6 +24,7 @@ public class UsuarioController
     private UsuarioService usuarioService;
 
     // Post
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PostMapping
     public ResponseEntity<Map<Object, String>> salvarUsuario(@Valid @RequestBody UsuarioRequestDTO usuarioRequestDTO)
     {
@@ -38,6 +40,7 @@ public class UsuarioController
     }
 
     // Put
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/{id}")
     public ResponseEntity<Map<String, Object>> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioRequestDTO usuarioRequestDTO)
     {
@@ -47,6 +50,7 @@ public class UsuarioController
     }
 
     // Delete
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> excluirUsuario(@PathVariable Long id)
     {
