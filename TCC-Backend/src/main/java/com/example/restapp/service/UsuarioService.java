@@ -68,9 +68,20 @@ public class UsuarioService
         usuarioRepository.deleteById(usuario.getId());
     }
 
+//    private UsuarioResponseDTO toResponseDTO(Usuario usuario)
+//    {
+//        return new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getCargo());
+//    }
+
     private UsuarioResponseDTO toResponseDTO(Usuario usuario)
     {
-        return new UsuarioResponseDTO(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getCargo());
+        UsuarioResponseDTO usuarioResponseDTO = new UsuarioResponseDTO();
+        usuarioResponseDTO.setIdAuxiliar(usuario.getIdAuxiliar());
+        usuarioResponseDTO.setNome(usuario.getNome());
+        usuarioResponseDTO.setEmail(usuario.getEmail());
+        usuarioResponseDTO.setCargo(usuario.getCargo());
+
+        return usuarioResponseDTO;
     }
 
 }
